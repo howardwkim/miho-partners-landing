@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+/* Tokens extracted from modernlife.com's live CSS (spring + neutral families).
+   The "fall" (orange) family is dropped per the no-orange rule — see
+   reference/design-tokens-modernlife.md for the full extraction. */
+:root {
+  --background: #fbfcf5;
+  --surface: #eef2e4;
+  --foreground: #000000;
+  --muted: #7a7a7a;
+  --accent: #6cd689;
+  --accent-hover: #b6ebc4;
+  --deep: #005924;
+  --link: #118631;
+  --ink: #005924;
+  --ink-foreground: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-deep: var(--deep);
+  --color-link: var(--link);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --font-sans: var(--font-sans);
+  --font-accent: var(--font-accent);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.font-accent {
+  font-family: var(--font-accent), Georgia, serif;
+}
