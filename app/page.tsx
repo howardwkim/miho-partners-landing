@@ -7,14 +7,14 @@ const OBJECTIONS = [
   },
   {
     q: "“I’ve tried consultants before and got a binder I never opened.”",
-    a: "That’s why the audit ends with three to seven tools, not thirty pages of theory. You’ll know what to do on day one.",
+    a: "That’s why the audit ends with one or two tools, not thirty pages of theory. You’ll know what to do on day one.",
   },
   {
     q: "“I don’t have time for this.”",
     a: "You have 45 minutes. What you don’t have is another year of doing this by hand.",
   },
   {
-    q: "“Is $999 worth it?”",
+    q: "“Is $399 worth it?”",
     a: "If we don’t find at least 5 hours a week, we refund it. That’s the only guarantee we’re willing to make, because it’s the only one we’re sure of.",
   },
 ];
@@ -82,13 +82,13 @@ export default function Home() {
             </span>
           </h1>
           <p className="mt-7 max-w-md text-lg leading-relaxed text-muted">
-            In 45 minutes, we find where AI can give you real hours back in your week. Then we
-            hand you three to seven tools you can start using immediately. No jargon, no 40-page
+            In 45 minutes, we find where we can give you real hours back in your week. Then we
+            hand you one or two tools you can start using immediately. No jargon, no 20-page
             deck.
           </p>
           <div className="mt-9 flex items-center gap-5">
             <BookButton />
-            <span className="text-sm text-muted">$999 &middot; 45 minutes &middot; money-back guarantee</span>
+            <span className="text-sm text-muted">$399 &middot; 45 minutes &middot; money-back guarantee</span>
           </div>
         </div>
 
@@ -152,7 +152,7 @@ export default function Home() {
         <div className="mx-auto w-full max-w-5xl px-6 sm:px-10">
           <div className="mb-12 max-w-2xl">
             <h2 className="text-3xl font-light tracking-tight sm:text-4xl">
-              The offer: the <span className="font-accent italic">AI Audit</span>
+              The offer: the <span className="font-accent italic">Time Saver Audit</span>
             </h2>
             <p className="mt-4 text-lg text-muted">
               It isn&rsquo;t a report telling you what&rsquo;s wrong. It&rsquo;s a short list of
@@ -169,7 +169,7 @@ export default function Home() {
               },
               {
                 n: "02",
-                t: "3 to 7 specific tools",
+                t: "One or two specific tools",
                 d: "Picked for your business, not a generic list.",
               },
               {
@@ -189,7 +189,7 @@ export default function Home() {
           <div className="mt-8 flex flex-col items-start justify-between gap-6 rounded-3xl bg-ink p-8 text-ink-foreground sm:flex-row sm:items-center">
             <div>
               <div className="text-sm uppercase tracking-wide text-ink-foreground/60">Price</div>
-              <div className="mt-1 text-4xl font-extrabold">$999</div>
+              <div className="mt-1 text-4xl font-extrabold">$399</div>
             </div>
             <div className="max-w-md text-ink-foreground/85">
               <span className="font-semibold text-ink-foreground">The guarantee: </span>
@@ -229,12 +229,21 @@ export default function Home() {
               </div>
               <div className="mt-5 text-xl font-bold">Mike Grabham</div>
               <p className="mt-3 leading-relaxed text-muted">
-                Mike has started six companies over the past 20 years, from a $14M regional
-                telecommunications firm to early-stage software startups. He sold his first after
-                more than tripling its revenue, and raised over $3M in outside capital across the
-                rest. He&rsquo;s not theorizing from a case study. He&rsquo;s run the P&amp;L, made
-                payroll, and negotiated the acquisitions himself.
+                Mike Grabham is an MBA, six-time founder, and small business consultant who has
+                spent more than 20 years building companies, managing teams, raising capital, and
+                navigating two successful exits. He is not theorizing from a case study. He knows
+                what it feels like to make payroll, watch cash closely, and carry the weight of
+                every major decision. Today, Mike helps small business owners strengthen cash in
+                the bank, improve communications, tighten operations, and use practical AI tools to
+                eliminate repetitive work so they can keep more of what they earn and build a
+                business that works for them.
               </p>
+              <a
+                href="mailto:mike@mihopartners.com"
+                className="mt-4 inline-block text-sm font-medium text-link transition-colors hover:text-deep"
+              >
+                mike@mihopartners.com
+              </a>
             </div>
             <div className="rounded-3xl bg-background p-8">
               <div className="relative h-20 w-20 overflow-hidden rounded-full">
@@ -248,6 +257,12 @@ export default function Home() {
                 third. He&rsquo;s not theorizing about AI. He&rsquo;s the one who configures it,
                 ships it, and hands it off running.
               </p>
+              <a
+                href="mailto:howard@mihopartners.com"
+                className="mt-4 inline-block text-sm font-medium text-link transition-colors hover:text-deep"
+              >
+                howard@mihopartners.com
+              </a>
             </div>
           </div>
         </div>
@@ -284,18 +299,24 @@ export default function Home() {
         <div className="mx-auto flex w-full max-w-5xl flex-col items-start justify-between gap-8 px-6 sm:flex-row sm:items-center sm:px-10">
           <div>
             <h2 className="text-3xl font-light tracking-tight sm:text-4xl">
-              Start with the <span className="font-accent italic">audit</span>.
+              Start with the <span className="font-accent italic">Time Saver Audit</span>.
             </h2>
             <p className="mt-3 max-w-md text-ink-foreground/80">
-              $999, one 45-minute call, five hours a week guaranteed or your money back.
+              $399, one 45-minute call, five hours a week guaranteed or your money back.
             </p>
           </div>
           <BookButton />
         </div>
       </section>
 
-      <footer className="mx-auto w-full max-w-6xl px-6 py-10 text-sm text-muted sm:px-10">
-        MiHo Partners &mdash; Mike Grabham &amp; Howard Kim
+      <footer className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-6 py-10 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-10">
+        <span>MiHo Partners &mdash; Mike Grabham &amp; Howard Kim</span>
+        <a
+          href="mailto:hello@mihopartners.com"
+          className="font-medium transition-colors hover:text-link"
+        >
+          hello@mihopartners.com
+        </a>
       </footer>
     </div>
   );
