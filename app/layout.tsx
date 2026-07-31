@@ -15,9 +15,9 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "MiHo Partners — Find out which AI tools actually matter",
+  title: "MiHo Partners — Get real hours back in your week",
   description:
-    "A 45-minute AI audit that hands you 3 to 7 tools built for your business. $999, five hours a week back or your money back.",
+    "A 45-minute Time Saver Audit that hands you one or two tools built for your business. $399, five hours a week back or your money back.",
 };
 
 export default function RootLayout({
