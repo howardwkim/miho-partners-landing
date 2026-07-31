@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { BookButton } from "./components/BookButton";
+import { SiteNav } from "./components/SiteNav";
 
 const OBJECTIONS = [
   {
@@ -38,38 +40,10 @@ const LADDER = [
   },
 ];
 
-function BookButton({ className = "" }: { className?: string }) {
-  return (
-    <a
-      href="#book"
-      className={`inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-md bg-accent px-[14px] py-[12px] text-[15px] font-semibold text-foreground transition-colors hover:bg-accent-hover ${className}`}
-    >
-      Book your audit
-    </a>
-  );
-}
-
 export default function Home() {
   return (
     <div className="flex flex-col">
-      {/* Nav */}
-      <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-7 sm:px-10">
-        <div className="text-lg font-extrabold tracking-tight">
-          MiHo <span className="font-accent italic">Partners</span>
-        </div>
-        <nav className="hidden items-center gap-8 text-sm font-medium text-foreground sm:flex">
-          <a href="#offer" className="transition-colors hover:text-link">
-            The audit
-          </a>
-          <a href="#founders" className="transition-colors hover:text-link">
-            About
-          </a>
-          <a href="#ladder" className="transition-colors hover:text-link">
-            Beyond the audit
-          </a>
-        </nav>
-        <BookButton />
-      </header>
+      <SiteNav />
 
       {/* Hero */}
       <section className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-16 px-6 pb-20 pt-10 sm:px-10 md:grid-cols-2 md:pt-16">
@@ -98,6 +72,9 @@ export default function Home() {
         </div>
 
         <div className="relative mx-auto aspect-square w-full max-w-md">
+          {/* Tan ring behind the founders — the warm family's first UI appearance,
+              mirroring Modern Life's halo behind their hero illustration. */}
+          <div className="absolute -inset-[7%] rounded-full bg-warm/60" />
           <div className="absolute inset-0 rounded-full bg-accent-hover" />
           <div className="absolute inset-[6%] overflow-hidden rounded-full bg-surface">
             <div className="absolute left-0 top-0 h-full w-1/2 overflow-hidden">
@@ -135,25 +112,26 @@ export default function Home() {
 
       {/* Problem */}
       <section className="mx-auto w-full max-w-3xl px-6 py-16 text-center sm:px-10">
-        <p className="text-xl leading-relaxed sm:text-2xl">
+        <p className="reveal text-xl leading-relaxed sm:text-2xl">
           You&rsquo;ve read the AI headlines. You&rsquo;ve watched competitors post about some new
           workflow. You know something in your business could run better with the right tool.
         </p>
-        <p className="mt-6 text-xl leading-relaxed text-muted sm:text-2xl">
+        <p className="reveal-delay-1 reveal mt-6 text-xl leading-relaxed text-muted sm:text-2xl">
           You also know you don&rsquo;t have time to figure out which tool, whether it&rsquo;s
           worth the setup, or whether it just becomes one more thing that gets abandoned in a
           month.
         </p>
-        <p className="mt-6 text-xl leading-relaxed sm:text-2xl">
+        <p className="reveal-delay-2 reveal mt-6 text-xl leading-relaxed sm:text-2xl">
           That&rsquo;s the actual problem. Not a lack of AI.{" "}
           <span className="font-accent italic text-2xl sm:text-3xl">
-            A lack of time to sort the real tools from the noise.
+            A lack of{" "}
+            <span className="highlight-swipe">time to sort the real tools from the noise</span>.
           </span>
         </p>
       </section>
 
       {/* Offer */}
-      <section id="offer" className="bg-surface py-20">
+      <section id="offer" className="reveal bg-surface py-20">
         <div className="mx-auto w-full max-w-5xl px-6 sm:px-10">
           <div className="mb-12 max-w-2xl">
             <h2 className="text-3xl font-light tracking-tight sm:text-4xl">
@@ -207,7 +185,7 @@ export default function Home() {
       </section>
 
       {/* Objections */}
-      <section className="mx-auto w-full max-w-5xl px-6 py-20 sm:px-10">
+      <section className="reveal mx-auto w-full max-w-5xl px-6 py-20 sm:px-10">
         <h2 className="text-3xl font-light tracking-tight sm:text-4xl">
           Fair <span className="font-accent italic">questions</span>
         </h2>
@@ -222,7 +200,7 @@ export default function Home() {
       </section>
 
       {/* Founders */}
-      <section id="founders" className="bg-surface py-20">
+      <section id="founders" className="reveal bg-surface py-20">
         <div className="mx-auto w-full max-w-5xl px-6 sm:px-10">
           <h2 className="text-3xl font-light tracking-tight sm:text-4xl">
             Who&rsquo;s <span className="font-accent italic">behind this</span>
@@ -280,7 +258,7 @@ export default function Home() {
       </section>
 
       {/* Ladder */}
-      <section id="ladder" className="mx-auto w-full max-w-5xl px-6 py-20 sm:px-10">
+      <section id="ladder" className="reveal mx-auto w-full max-w-5xl px-6 py-20 sm:px-10">
         <h2 className="text-3xl font-light tracking-tight sm:text-4xl">
           Where it goes <span className="font-accent italic">from here</span>
         </h2>
@@ -306,7 +284,7 @@ export default function Home() {
       </section>
 
       {/* Final CTA */}
-      <section id="book" className="bg-ink py-16 text-ink-foreground">
+      <section id="book" className="reveal bg-ink py-16 text-ink-foreground">
         <div className="mx-auto flex w-full max-w-5xl flex-col items-start justify-between gap-8 px-6 sm:flex-row sm:items-center sm:px-10">
           <div>
             <h2 className="text-3xl font-light tracking-tight sm:text-4xl">

@@ -1,19 +1,54 @@
 @import "tailwindcss";
 
-/* Tokens extracted from modernlife.com's live CSS (spring + neutral families).
-   The "fall" (orange) family is dropped per the no-orange rule — see
-   reference/design-tokens-modernlife.md for the full extraction. */
+/* Tokens extracted from modernlife.com's live CSS — spring, fall and neutral
+   families, with Modern Life's own token names kept because the naming is
+   informative. Full extraction: reference/design-tokens-modernlife.md.
+   The fall (warm) family was admitted 2026-07-31 — see reference/decisions.md.
+   On Modern Life the warm tones are illustration-only; using them as UI
+   accents is a deliberate departure. The brief's ban on purple-to-orange
+   gradients still stands and is unaffected by those hues existing. */
 :root {
-  --background: #fbfcf5;
-  --surface: #eef2e4;
-  --foreground: #000000;
-  --muted: #7a7a7a;
-  --accent: #6cd689;
-  --accent-hover: #b6ebc4;
-  --deep: #005924;
-  --link: #118631;
-  --ink: #005924;
-  --ink-foreground: #ffffff;
+  /* Spring — primary brand green */
+  --spring-deep: #005924;
+  --spring-cta: #118631;
+  --spring-vibrant: #6cd689;
+  --spring-vibrant-50: #b6ebc4;
+  --spring-bright: #f4ffb0;
+  --spring-bright-50: #f9ffd8;
+  --spring-mute: #eef2e4;
+  --spring-light-25: #fbfcf8;
+
+  /* Fall — warm secondary */
+  --fall-deep: #bb4038;
+  --fall-vibrant: #ff8061;
+  --fall-bright: #f8a08c;
+  --fall-medium: #f2e0ca;
+  --fall-light-50: #f8efe5;
+  --fall-mute: #fff6e9;
+
+  /* Neutrals */
+  --neutral-black: #000000;
+  --white: #ffffff;
+  --neutral-mid-1: #fbfcf5;
+  --ux-gray-1: #fafafa;
+  --ux-gray-2: #e7e7e7;
+  --ux-gray-3: #aeaeae;
+  --ux-gray-4: #7a7a7a;
+
+  /* Semantic aliases — what the page actually reaches for */
+  --background: var(--neutral-mid-1);
+  --surface: var(--spring-mute);
+  --foreground: var(--neutral-black);
+  --muted: var(--ux-gray-4);
+  --accent: var(--spring-vibrant);
+  --accent-hover: var(--spring-vibrant-50);
+  --deep: var(--spring-deep);
+  --link: var(--spring-cta);
+  --ink: var(--spring-deep);
+  --ink-foreground: var(--white);
+  --highlight: var(--spring-bright);
+  --warm: var(--fall-medium);
+  --warm-deep: var(--fall-deep);
 }
 
 @theme inline {
@@ -27,6 +62,29 @@
   --color-link: var(--link);
   --color-ink: var(--ink);
   --color-ink-foreground: var(--ink-foreground);
+  --color-highlight: var(--highlight);
+  --color-warm: var(--warm);
+  --color-warm-deep: var(--warm-deep);
+
+  --color-spring-deep: var(--spring-deep);
+  --color-spring-cta: var(--spring-cta);
+  --color-spring-vibrant: var(--spring-vibrant);
+  --color-spring-vibrant-50: var(--spring-vibrant-50);
+  --color-spring-bright: var(--spring-bright);
+  --color-spring-bright-50: var(--spring-bright-50);
+  --color-spring-mute: var(--spring-mute);
+  --color-spring-light-25: var(--spring-light-25);
+  --color-fall-deep: var(--fall-deep);
+  --color-fall-vibrant: var(--fall-vibrant);
+  --color-fall-bright: var(--fall-bright);
+  --color-fall-medium: var(--fall-medium);
+  --color-fall-light-50: var(--fall-light-50);
+  --color-fall-mute: var(--fall-mute);
+  --color-ux-gray-1: var(--ux-gray-1);
+  --color-ux-gray-2: var(--ux-gray-2);
+  --color-ux-gray-3: var(--ux-gray-3);
+  --color-ux-gray-4: var(--ux-gray-4);
+
   --font-sans: var(--font-sans);
   --font-accent: var(--font-accent);
 }
@@ -87,4 +145,51 @@ body {
     -webkit-text-fill-color: currentColor;
     background: none;
   }
+}
+
+/* ---------------------------------------------------------------
+   Scroll reveal — fade + short rise as a section enters the viewport,
+   the same restrained move Modern Life uses. Pure CSS via
+   animation-timeline: view(), so there is no JS, no observer, and
+   nothing to hydrate.
+
+   Browsers without scroll-driven animation support (Safari as of
+   writing) simply render the content in its final state: the @supports
+   gate means .reveal never applies its start frame there, so content is
+   visible rather than stuck at opacity 0. Fail-visible, not fail-blank.
+   --------------------------------------------------------------- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+
+    .reveal-delay-1 {
+      animation-range: entry 4% entry 60%;
+    }
+
+    .reveal-delay-2 {
+      animation-range: entry 8% entry 65%;
+    }
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hand-drawn emphasis — the "highlighter swipe" device from the brief,
+   now that the bright lime exists as a token to carry it. */
+.highlight-swipe {
+  background: linear-gradient(180deg, transparent 62%, var(--highlight) 62%);
+  padding: 0 0.08em;
 }
