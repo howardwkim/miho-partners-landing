@@ -42,7 +42,12 @@ export function SiteNav() {
       </nav>
 
       <div className="flex items-center gap-3">
-        <BookButton className="hidden sm:inline-flex" />
+        {/* Wrapper, not a class on the button: BookButton's own `inline-flex`
+            collides with `hidden`, and display utilities resolve by CSS source
+            order, so the hide silently loses. */}
+        <span className="hidden sm:block">
+          <BookButton />
+        </span>
 
         {/* Mobile: hamburger */}
         <button
