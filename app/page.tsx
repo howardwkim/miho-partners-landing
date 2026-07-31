@@ -225,7 +225,13 @@ export default function Home() {
           <div className="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2">
             <div className="rounded-3xl bg-background p-8">
               <div className="relative h-20 w-20 overflow-hidden rounded-full">
-                <Image src="/founders/mike.jpeg" alt="Mike Grabham" fill className="object-cover" />
+                <Image
+                  src="/founders/mike-closeup.jpg"
+                  alt="Mike Grabham"
+                  fill
+                  sizes="80px"
+                  className="object-cover"
+                />
               </div>
               <div className="mt-5 text-xl font-bold">Mike Grabham</div>
               <p className="mt-3 leading-relaxed text-muted">
