@@ -40,3 +40,116 @@ body {
 .font-accent {
   font-family: var(--font-accent), Georgia, serif;
 }
+
+/* ---------------------------------------------------------------
+   Guarantee emphasis devices, swiped from design/extractions/beside-hero
+   (beside.com). Two options, both live so they can be compared:
+     A. .guarantee-shimmer — clipped-gradient sweep over the text
+     B. .guarantee-chip    — status pill with a live dot
+   Keyframes/timings are beside's; the colour band is retuned from their
+   blue/red/orange to MiHO's greens so the rest state stays on-palette.
+   --------------------------------------------------------------- */
+
+/* --- Option A: the sweep --- */
+.guarantee-shimmer {
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(
+      90deg,
+      var(--deep) 0% 25%,
+      #118631 38%,
+      #6cd689 50%,
+      #b6ebc4 62%,
+      var(--deep) 75% 100%
+    )
+    0 0 / 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: 4s linear infinite guarantee-sweep;
+}
+
+@keyframes guarantee-sweep {
+  0% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: -100%;
+  }
+}
+
+/* --- Option B: the live pill --- */
+.guarantee-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border: 1px solid #00592414;
+  border-radius: 999px;
+  background: #ffffffb3;
+  backdrop-filter: blur(8px);
+  font-size: 13px;
+  font-weight: 500;
+  color: #005924b3;
+  animation: 0.35s ease-out both chip-in;
+}
+
+@keyframes chip-in {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.guarantee-chip .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--link);
+  box-shadow: 0 0 0 4px #11863126;
+  animation: 2s ease-in-out infinite chip-pulse;
+}
+
+@keyframes chip-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px #11863126;
+  }
+  50% {
+    box-shadow: 0 0 0 6px #1186310d;
+  }
+}
+
+.chip-shimmer {
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(90deg, #00592466 0% 30%, #005924e6 50%, #00592466 70% 100%) 0 0 /
+    200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: 2.2s linear infinite chip-shimmer-sweep;
+}
+
+@keyframes chip-shimmer-sweep {
+  0% {
+    background-position: 200%;
+  }
+  100% {
+    background-position: -200%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guarantee-shimmer,
+  .guarantee-chip,
+  .guarantee-chip .dot,
+  .chip-shimmer {
+    animation: none;
+  }
+  .guarantee-shimmer,
+  .chip-shimmer {
+    -webkit-text-fill-color: currentColor;
+    background: none;
+  }
+}
