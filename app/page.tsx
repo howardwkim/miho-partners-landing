@@ -42,7 +42,7 @@ function BookButton({ className = "" }: { className?: string }) {
   return (
     <a
       href="#book"
-      className={`inline-flex items-center justify-center rounded-md bg-accent px-[14px] py-[12px] text-[15px] font-semibold text-foreground transition-colors hover:bg-accent-hover ${className}`}
+      className={`inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-md bg-accent px-[14px] py-[12px] text-[15px] font-semibold text-foreground transition-colors hover:bg-accent-hover ${className}`}
     >
       Book your audit
     </a>
@@ -74,11 +74,6 @@ export default function Home() {
       {/* Hero */}
       <section className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-16 px-6 pb-20 pt-10 sm:px-10 md:grid-cols-2 md:pt-16">
         <div>
-          {/* Option B — the live pill, from the beside.com extraction */}
-          <div className="guarantee-chip mb-7">
-            <span className="dot" />
-            <span className="chip-shimmer">Money-back guarantee &middot; 5 hours a week or you don&rsquo;t pay</span>
-          </div>
           <h1 className="text-[2.75rem] font-light leading-[1.08] tracking-tight sm:text-6xl">
             You don&rsquo;t need to learn AI.
             <br />
@@ -93,9 +88,10 @@ export default function Home() {
           </p>
           <div className="mt-9 flex items-center gap-5">
             <BookButton />
-            {/* Option A — the gradient sweep, from the beside.com extraction */}
-            <span className="text-sm text-muted">
-              $399 &middot; 45 minutes &middot;{" "}
+            {/* Gradient sweep, from the beside.com extraction */}
+            <span className="text-sm leading-snug text-muted">
+              $399 &middot; 45 minutes
+              <br />
               <span className="guarantee-shimmer font-semibold">money-back guarantee</span>
             </span>
           </div>

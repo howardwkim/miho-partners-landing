@@ -42,24 +42,29 @@ body {
 }
 
 /* ---------------------------------------------------------------
-   Guarantee emphasis devices, swiped from design/extractions/beside-hero
-   (beside.com). Two options, both live so they can be compared:
-     A. .guarantee-shimmer — clipped-gradient sweep over the text
-     B. .guarantee-chip    — status pill with a live dot
-   Keyframes/timings are beside's; the colour band is retuned from their
-   blue/red/orange to MiHO's greens so the rest state stays on-palette.
-   --------------------------------------------------------------- */
+   Guarantee sweep — clipped-gradient text animation swiped from
+   design/extractions/beside-hero (beside.com). Colour band is theirs
+   verbatim: ink -> blue -> red -> orange -> ink.
 
-/* --- Option A: the sweep --- */
+   Loop math (this is what makes it seamless):
+   background-position percentages resolve against (container - image),
+   which here is 100% - 250% = -150% of the container width. So a
+   position span of P travels P * 1.5 container-widths. The gradient
+   tile is 250% wide, so a seamless loop needs travel == 250%, i.e. a
+   position span of 250/150 = 166.667%, split symmetrically as
+   83.333% -> -83.333%. Beside's own 100% -> -100% travels 300% against
+   a 250% tile, which replays 1.2 sweeps per cycle and visibly restarts
+   ~83% of the way through. Fixed here.
+   --------------------------------------------------------------- */
 .guarantee-shimmer {
   -webkit-text-fill-color: transparent;
   background: linear-gradient(
       90deg,
-      var(--deep) 0% 25%,
-      #118631 38%,
-      #6cd689 50%,
-      #b6ebc4 62%,
-      var(--deep) 75% 100%
+      #0e0e10 0% 25%,
+      #498fff 38%,
+      #ff7a7a 50%,
+      #ffbc74 62%,
+      #0e0e10 75% 100%
     )
     0 0 / 250% 100%;
   -webkit-background-clip: text;
@@ -69,86 +74,16 @@ body {
 
 @keyframes guarantee-sweep {
   0% {
-    background-position: 100%;
+    background-position: 83.333% 0;
   }
   100% {
-    background-position: -100%;
-  }
-}
-
-/* --- Option B: the live pill --- */
-.guarantee-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 14px;
-  border: 1px solid #00592414;
-  border-radius: 999px;
-  background: #ffffffb3;
-  backdrop-filter: blur(8px);
-  font-size: 13px;
-  font-weight: 500;
-  color: #005924b3;
-  animation: 0.35s ease-out both chip-in;
-}
-
-@keyframes chip-in {
-  0% {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.guarantee-chip .dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--link);
-  box-shadow: 0 0 0 4px #11863126;
-  animation: 2s ease-in-out infinite chip-pulse;
-}
-
-@keyframes chip-pulse {
-  0%,
-  100% {
-    box-shadow: 0 0 0 3px #11863126;
-  }
-  50% {
-    box-shadow: 0 0 0 6px #1186310d;
-  }
-}
-
-.chip-shimmer {
-  -webkit-text-fill-color: transparent;
-  background: linear-gradient(90deg, #00592466 0% 30%, #005924e6 50%, #00592466 70% 100%) 0 0 /
-    200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  animation: 2.2s linear infinite chip-shimmer-sweep;
-}
-
-@keyframes chip-shimmer-sweep {
-  0% {
-    background-position: 200%;
-  }
-  100% {
-    background-position: -200%;
+    background-position: -83.333% 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .guarantee-shimmer,
-  .guarantee-chip,
-  .guarantee-chip .dot,
-  .chip-shimmer {
+  .guarantee-shimmer {
     animation: none;
-  }
-  .guarantee-shimmer,
-  .chip-shimmer {
     -webkit-text-fill-color: currentColor;
     background: none;
   }
