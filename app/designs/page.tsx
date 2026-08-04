@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { BookButton } from "../components/BookButton";
+import { PostRow } from "../components/PostRow";
+import { Takeaway } from "../components/Takeaway";
+import { AUTHORS } from "@/lib/insights/authors";
+import type { PostSummary } from "@/lib/insights/types";
 
 export const metadata: Metadata = {
   title: "Style guide — MiHo Partners",
@@ -53,6 +58,16 @@ const TYPE = [
   { name: "Small", cls: "text-sm text-muted", spec: "14px · ux-gray-4 — meta lines, captions" },
 ];
 
+const SAMPLE_POST: PostSummary = {
+  slug: "most-ai-tools-solve-a-problem-you-dont-have",
+  title: "Most AI tools solve a problem you don't have",
+  deck: "The question isn't which tool is best. It's which twenty minutes of your week you'd pay to never do again.",
+  date: "2026-07-24",
+  category: "AI tools",
+  author: "howard",
+  readingMinutes: 4,
+};
+
 function Section({
   id,
   title,
@@ -103,9 +118,9 @@ export default function Designs() {
   return (
     <div className="mx-auto w-full max-w-5xl px-6 pb-24 sm:px-10">
       <header className="py-10">
-        <a href="/" className="text-sm text-muted transition-colors hover:text-link">
+        <Link href="/" className="text-sm text-muted transition-colors hover:text-link">
           &larr; Back to the site
-        </a>
+        </Link>
         <h1 className="mt-8 text-[2.75rem] font-light leading-[1.08] tracking-tight sm:text-6xl">
           The <span className="font-accent italic">style guide</span>
         </h1>
@@ -240,6 +255,101 @@ export default function Designs() {
           <code className="text-xs">rounded-md</code> (6px) for buttons &mdash; Modern Life&rsquo;s
           buttons are a soft rounded rectangle, not a pill.
         </p>
+      </Section>
+
+      <Section id="insights" title="Insights components">
+        <p className="mb-10 max-w-2xl text-muted">
+          Used only in the insights section. The listing row is shared between{" "}
+          <code className="text-xs">/insights</code> and the homepage sampler, so there is one row
+          design rather than two that drift apart.
+        </p>
+
+        <div className="space-y-12">
+          <div>
+            <div className="mb-3 text-lg font-bold">Listing row</div>
+            <p className="mb-5 max-w-2xl text-sm text-muted">
+              Category, date, reading time, title, deck, author. The thumbnail is optional and the
+              slot collapses when a post has no image &mdash; fixed row height either way, never a
+              reflowing grid. Shown here without an image, which is the common case.
+            </p>
+            <div className="rounded-2xl border border-ux-gray-2 px-6">
+              <PostRow post={SAMPLE_POST} />
+            </div>
+          </div>
+
+          <div>
+            <div className="mb-3 text-lg font-bold">Category chips</div>
+            <p className="mb-5 max-w-2xl text-sm text-muted">
+              Filter in place over a flat list. Five fixed categories, declared as a type union and
+              validated at build time &mdash; a post with an invented category fails the build. Only
+              categories that actually have posts get a chip.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <span className="rounded-md bg-ink px-3 py-[7px] text-sm font-medium text-ink-foreground">
+                All
+              </span>
+              <span className="rounded-md border border-ux-gray-2 px-3 py-[7px] text-sm font-medium text-muted">
+                Time drains
+              </span>
+              <span className="rounded-md border border-ux-gray-2 px-3 py-[7px] text-sm font-medium text-muted">
+                AI tools
+              </span>
+            </div>
+          </div>
+
+          <div>
+            <div className="mb-3 text-lg font-bold">Byline</div>
+            <p className="mb-5 max-w-2xl text-sm text-muted">
+              Articles alternate between Mike and Howard. The face and the name carry the trust;
+              the firm sits under it. No credential line &mdash; under every article that reads as
+              selling rather than writing.
+            </p>
+            <div className="flex items-center gap-4 border-t border-ux-gray-2 pt-6">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={AUTHORS.howard.photo}
+                alt={AUTHORS.howard.name}
+                className="h-11 w-11 shrink-0 rounded-full object-cover"
+              />
+              <div>
+                <div className="text-sm font-bold">{AUTHORS.howard.name}</div>
+                <div className="text-sm text-muted">{AUTHORS.howard.affiliation}</div>
+                <div className="mt-[2px] text-xs text-muted">July 24, 2026 · 4 min read</div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div className="mb-3 text-lg font-bold">Takeaway block</div>
+            <p className="mb-5 max-w-2xl text-sm text-muted">
+              Required in every article. MiHo sells prescription, not diagnosis &mdash; an article
+              that ends on a platitude contradicts the thing being sold. This is a structural slot
+              that has to be filled with something concrete. One per article.
+            </p>
+            {/* Wrapped in prose because that's how it appears in an article —
+                the component inherits body styling rather than defining it. */}
+            <div className="prose prose-miho max-w-none">
+              <Takeaway title="Before you buy anything">
+                <ul>
+                  <li>Write the task down by hand, in one sentence.</li>
+                  <li>Time it once, honestly.</li>
+                  <li>Name who checks it&rsquo;s still running in 60 days.</li>
+                </ul>
+              </Takeaway>
+            </div>
+          </div>
+
+          <div>
+            <div className="mb-3 text-lg font-bold">Article prose</div>
+            <p className="max-w-2xl text-sm text-muted">
+              Tailwind&rsquo;s typography plugin as the base, with every{" "}
+              <code className="text-xs">--tw-prose-*</code> variable remapped onto the tokens above
+              &mdash; the plugin&rsquo;s defaults are grays on white, which the brief rules out. Applied
+              as <code className="text-xs">prose prose-miho</code>. Headings take the site&rsquo;s
+              light weight and tight tracking rather than the plugin&rsquo;s bold defaults.
+            </p>
+          </div>
+        </div>
       </Section>
 
       <Section id="unused" title="Not yet used">

@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { BookButton } from "./components/BookButton";
+import { InsightsSampler } from "./components/InsightsSampler";
+import { SiteFooter } from "./components/SiteFooter";
 import { SiteNav } from "./components/SiteNav";
 
 const OBJECTIONS = [
@@ -77,25 +79,14 @@ export default function Home() {
           <div className="absolute -inset-[7%] rounded-full bg-warm/60" />
           <div className="absolute inset-0 rounded-full bg-accent-hover" />
           <div className="absolute inset-[6%] overflow-hidden rounded-full bg-surface">
-            <div className="absolute left-0 top-0 h-full w-1/2 overflow-hidden">
-              <Image
-                src="/founders/mike.jpeg"
-                alt="Mike Grabham, co-founder of MiHo Partners"
-                fill
-                sizes="(max-width: 768px) 45vw, 220px"
-                className="object-cover"
-                priority
-              />
-            </div>
-            <div className="absolute right-0 top-0 h-full w-1/2 overflow-hidden">
-              <Image
-                src="/founders/howard.jpeg"
-                alt="Howard Kim, co-founder of MiHo Partners"
-                fill
-                sizes="(max-width: 768px) 45vw, 220px"
-                className="object-cover"
-              />
-            </div>
+            <Image
+              src="/founders/founders-composite.png"
+              alt="Mike Grabham and Howard Kim, co-founders of MiHo Partners"
+              fill
+              sizes="(max-width: 768px) 90vw, 440px"
+              className="object-cover"
+              priority
+            />
           </div>
           <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-background px-5 py-2 text-sm font-semibold shadow-sm">
             Mike &amp; Howard, MiHo Partners
@@ -257,6 +248,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Insights sampler */}
+      <InsightsSampler />
+
       {/* Ladder */}
       <section id="ladder" className="reveal mx-auto w-full max-w-5xl px-6 py-20 sm:px-10">
         <h2 className="text-3xl font-light tracking-tight sm:text-4xl">
@@ -298,15 +292,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-6 py-10 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-10">
-        <span>MiHo Partners &mdash; Mike Grabham &amp; Howard Kim</span>
-        <a
-          href="mailto:hello@mihopartners.com"
-          className="font-medium transition-colors hover:text-link"
-        >
-          hello@mihopartners.com
-        </a>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

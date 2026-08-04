@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 /* Tokens extracted from modernlife.com's live CSS — spring, fall and neutral
    families, with Modern Life's own token names kept because the naming is
@@ -192,4 +193,67 @@ body {
 .highlight-swipe {
   background: linear-gradient(180deg, transparent 62%, var(--highlight) 62%);
   padding: 0 0.08em;
+}
+
+/* ---------------------------------------------------------------
+   Article prose — used as `prose prose-miho` on insights bodies.
+
+   The typography plugin's defaults are Tailwind grays on white, which
+   is the one thing the brief rules out. This maps every prose variable
+   onto the site's own tokens so an article reads as the same document
+   as the landing page. Headings stay pure black; body text is softened
+   slightly for long-form reading, which is the only judgement call here.
+   --------------------------------------------------------------- */
+@utility prose-miho {
+  --tw-prose-body: #23231f;
+  --tw-prose-headings: var(--neutral-black);
+  --tw-prose-lead: var(--ux-gray-4);
+  --tw-prose-links: var(--spring-cta);
+  --tw-prose-bold: var(--neutral-black);
+  --tw-prose-counters: var(--spring-deep);
+  --tw-prose-bullets: var(--spring-vibrant);
+  --tw-prose-hr: var(--ux-gray-2);
+  --tw-prose-quotes: var(--neutral-black);
+  --tw-prose-quote-borders: var(--spring-vibrant);
+  --tw-prose-captions: var(--ux-gray-4);
+  --tw-prose-code: var(--spring-deep);
+  --tw-prose-pre-code: var(--ux-gray-2);
+  --tw-prose-pre-bg: var(--spring-deep);
+  --tw-prose-th-borders: var(--ux-gray-3);
+  --tw-prose-td-borders: var(--ux-gray-2);
+
+  font-size: 1.0625rem;
+  line-height: 1.75;
+
+  /* Headings follow the site's light-weight, tight-tracking treatment
+     rather than the plugin's bold defaults. */
+  & :is(h2, h3, h4) {
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+
+  & h2 {
+    font-size: 1.75rem;
+    margin-top: 2.25em;
+  }
+
+  & h3 {
+    font-size: 1.3rem;
+  }
+
+  /* Colour is the hover signal site-wide — never underline-only. */
+  & a {
+    text-decoration-color: var(--spring-vibrant);
+    text-underline-offset: 3px;
+    transition: color 150ms;
+  }
+
+  & a:hover {
+    color: var(--spring-deep);
+  }
+
+  & blockquote {
+    font-style: normal;
+    font-weight: 400;
+  }
 }

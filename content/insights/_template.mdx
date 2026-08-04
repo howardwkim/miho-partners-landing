@@ -1,0 +1,48 @@
+export const meta = {
+  // Sentence case. This is the <h1> and the browser tab title.
+  title: "Template — copy this file to start a post",
+  // One sentence stating the article's claim. Renders in serif italic under the
+  // title and doubles as the meta description and the listing row's summary.
+  deck: "Every field below is validated at build time — a malformed post fails the build rather than shipping broken.",
+  // YYYY-MM-DD. Sorts the listing; nothing else reads it.
+  date: "2026-07-31",
+  // Exactly one of: Time drains · AI tools · Operations · Delegation & hiring · Pricing.
+  // Anything else fails the build. Add a category by editing lib/insights/types.ts.
+  category: "Operations",
+  // "mike" or "howard". Alternate between them.
+  author: "howard",
+  // Optional. Omit both lines for a type-only post — that is the common case.
+  // image: "/insights/some-image.jpg",
+  // imageAlt: "Required whenever image is set",
+  //
+  // This file stays draft forever. It is the authoring reference, and it is also
+  // what keeps content/insights/ non-empty — the article route resolves posts
+  // through a dynamic import, and an empty directory fails the build.
+  draft: true,
+};
+
+Write the body in plain markdown. Headings, lists, links, tables and emphasis all
+work. `##` is the top level inside an article — the title is already the `<h1>`.
+
+## What a section looks like
+
+Body text is styled by `prose prose-miho`, which maps Tailwind's typography
+plugin onto the site's own tokens. You do not need to add classes to anything.
+
+Inline links work normally and can point at the [audit](/#offer).
+
+<Takeaway title="What to do about it">
+
+Every article carries exactly one of these, near the end. It holds the concrete
+two or three things a reader should actually do:
+
+1. Something specific enough to start today.
+2. Something with a clear yes/no outcome.
+3. Something that compounds if they do it.
+
+No import needed — `Takeaway` is available in any post. The `title` is optional
+and defaults to "What to do about it".
+
+</Takeaway>
+
+Close with a short paragraph. Not a summary — a last thought that lands.

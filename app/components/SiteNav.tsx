@@ -1,12 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BookButton } from "./BookButton";
 
+// Root-relative, not bare fragments. A bare "#offer" resolves against whatever
+// page you're on, so from /insights/<slug> these would silently do nothing.
 const LINKS = [
-  { href: "#offer", label: "The audit" },
-  { href: "#founders", label: "About" },
-  { href: "#ladder", label: "Beyond the audit" },
+  { href: "/#offer", label: "The audit" },
+  { href: "/#founders", label: "About" },
+  { href: "/insights", label: "Insights" },
+  { href: "/#ladder", label: "Beyond the audit" },
 ];
 
 export function SiteNav() {
@@ -28,16 +32,16 @@ export function SiteNav() {
 
   return (
     <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-7 sm:px-10">
-      <a href="/" className="text-lg font-extrabold tracking-tight">
+      <Link href="/" className="text-lg font-extrabold tracking-tight">
         MiHo <span className="font-accent italic">Partners</span>
-      </a>
+      </Link>
 
       {/* Desktop: links inline */}
       <nav className="hidden items-center gap-8 text-sm font-medium text-foreground sm:flex">
         {LINKS.map((l) => (
-          <a key={l.href} href={l.href} className="transition-colors hover:text-link">
+          <Link key={l.href} href={l.href} className="transition-colors hover:text-link">
             {l.label}
-          </a>
+          </Link>
         ))}
       </nav>
 
@@ -83,14 +87,14 @@ export function SiteNav() {
           className="fixed inset-x-0 top-[84px] bottom-0 z-50 flex flex-col gap-1 bg-background px-6 pt-4 sm:hidden"
         >
           {LINKS.map((l) => (
-            <a
+            <Link
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
               className="border-b border-ux-gray-2 py-5 text-2xl font-light tracking-tight transition-colors hover:text-link"
             >
               {l.label}
-            </a>
+            </Link>
           ))}
           <BookButton className="mt-6 w-full py-4 text-base" />
         </div>

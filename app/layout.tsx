@@ -15,6 +15,8 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
+  // Needed so article OpenGraph image paths resolve to absolute URLs.
+  metadataBase: new URL("https://mihopartners.com"),
   title: "MiHo Partners — Get real hours back in your week",
   description:
     "A 45-minute Time Saver Audit that hands you one or two tools built for your business. $399, five hours a week back or your money back.",
