@@ -1,5 +1,5 @@
 import { config, collection, fields } from "@keystatic/core";
-import { block } from "@keystatic/core/content-components";
+import { wrapper } from "@keystatic/core/content-components";
 
 import { AUTHOR_IDS } from "./lib/insights/authors";
 import { CATEGORIES } from "./lib/insights/types";
@@ -97,7 +97,11 @@ export default config({
             image: { directory: "public/insights", publicPath: "/insights/" },
           },
           components: {
-            Takeaway: block({
+            // wrapper, not block: Takeaway holds the article's own markdown as
+            // children. A block carries only its schema fields, and parsing an
+            // existing post fails with "mdxJsxFlowElement has unexpected
+            // children".
+            Takeaway: wrapper({
               label: "Takeaway",
               description:
                 "The concrete two or three things a reader should do. Every article carries exactly one, near the end.",
