@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, Instrument_Serif } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -30,6 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${manrope.variable} ${instrumentSerif.variable} antialiased`}>
       <body>{children}</body>
+      <GoogleAnalytics gaId="G-T25BZM34Z6" />
     </html>
   );
 }
