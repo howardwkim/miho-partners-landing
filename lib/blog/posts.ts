@@ -1,33 +1,38 @@
 import fs from "node:fs";
 import path from "node:path";
-import type { ComponentType } from "react";
+import { createElement, type ComponentType } from "react";
+import * as jsxRuntime from "react/jsx-runtime";
 
+import { compile, run } from "@mdx-js/mdx";
 import matter from "gray-matter";
+import rehypeSlug from "rehype-slug";
+import remarkGfm from "remark-gfm";
 
+import { Takeaway } from "@/app/components/Takeaway";
 import { AUTHOR_IDS } from "./authors";
 import { CATEGORIES, type Category, type PostMeta, type PostSummary } from "./types";
 
-const CONTENT_DIR = path.join(process.cwd(), "content/insights");
+const CONTENT_DIR = path.join(process.cwd(), "content/blog");
 const WORDS_PER_MINUTE = 200;
+
+/** Components a post can use in its body without importing anything. */
+const MDX_COMPONENTS = { Takeaway };
 
 /**
  * Validate a post's YAML frontmatter at build time.
  *
  * Frontmatter is untyped by construction — TypeScript never sees inside an .mdx
  * file, and a YAML block carries no schema of its own. This function is the
- * whole guarantee. It runs inside generateStaticParams and the page renders,
- * both of which execute during `next build`, so a malformed post fails the
+ * whole guarantee. It runs during `next build`, so a malformed post fails the
  * build with a message naming the file and the problem rather than shipping a
  * broken page.
  *
- * The metadata deliberately lives in frontmatter rather than an exported
- * object: it is the format every content editor writes and reads, which is what
- * lets a browser-based editor and a hand-authored file produce byte-identical
- * posts. It also means metadata is readable off disk without importing (and so
- * compiling) every article, which is what the listing and the sitemap need.
+ * The metadata lives in frontmatter rather than an exported object because that
+ * is the format every content editor reads and writes, which is what lets the
+ * browser editor and a hand-authored file produce byte-identical posts.
  */
 function assertPostMeta(value: unknown, slug: string): PostMeta {
-  const where = `content/insights/${slug}.mdx`;
+  const where = `content/blog/${slug}.mdx`;
   const fail = (msg: string): never => {
     throw new Error(`${where}: ${msg}`);
   };
@@ -89,6 +94,17 @@ function assertPostMeta(value: unknown, slug: string): PostMeta {
   };
 }
 
+/**
+ * An absent or empty content directory means "no posts yet" — never an error.
+ *
+ * Article bodies are compiled from source at build time rather than imported as
+ * modules, specifically so this stays true. A dynamic `import()` of a path built
+ * from a slug forces the bundler to scan this directory up front, and an empty
+ * directory then fails the whole build with an error naming this file rather
+ * than the missing content. Compiling from disk removes that coupling: the
+ * bundler never looks in here, so the site degrades to an empty listing instead
+ * of refusing to build.
+ */
 function listSlugs(): string[] {
   if (!fs.existsSync(CONTENT_DIR)) return [];
   return fs
@@ -97,7 +113,6 @@ function listSlugs(): string[] {
     .map((f) => f.replace(/\.mdx$/, ""));
 }
 
-/** Frontmatter plus body, read straight off disk — no compile step involved. */
 function readSource(slug: string): { meta: PostMeta; body: string } {
   const raw = fs.readFileSync(path.join(CONTENT_DIR, `${slug}.mdx`), "utf8");
   const { data, content } = matter(raw);
@@ -114,15 +129,25 @@ function summarize(slug: string): PostSummary {
   return { ...meta, slug, readingMinutes: readingMinutes(body) };
 }
 
-type PostModule = { default: ComponentType };
-
-/**
- * The compiled article body. Metadata never comes from here — see readSource.
- * The directory this resolves against must never be empty; an empty
- * content/insights/ makes this dynamic import unresolvable and fails the build.
- */
-function loadModule(slug: string): Promise<PostModule> {
-  return import(`@/content/insights/${slug}.mdx`) as Promise<PostModule>;
+/** Compile one article body into a renderable component. */
+async function compileBody(body: string, slug: string): Promise<ComponentType> {
+  let MDXContent: ComponentType<{ components: typeof MDX_COMPONENTS }>;
+  try {
+    const compiled = await compile(body, {
+      outputFormat: "function-body",
+      development: false,
+      remarkPlugins: [remarkGfm],
+      rehypePlugins: [rehypeSlug],
+    });
+    ({ default: MDXContent } = await run(compiled, jsxRuntime as never));
+  } catch (cause) {
+    // Name the article. The raw MDX error points at a line in a string with no
+    // filename, which reads like a bug in the site rather than in a post.
+    throw new Error(`content/blog/${slug}.mdx: ${(cause as Error).message}`, { cause });
+  }
+  return function Content() {
+    return createElement(MDXContent, { components: MDX_COMPONENTS });
+  };
 }
 
 /** Drafts are visible while developing and never in a production build. */
@@ -140,11 +165,13 @@ export async function getPost(
 ): Promise<{ meta: PostSummary; Content: ComponentType } | null> {
   if (!listSlugs().includes(slug)) return null;
 
-  const meta = summarize(slug);
+  const { meta, body } = readSource(slug);
   if (meta.draft && !showDrafts) return null;
 
-  const mod = await loadModule(slug);
-  return { meta, Content: mod.default };
+  return {
+    meta: { ...meta, slug, readingMinutes: readingMinutes(body) },
+    Content: await compileBody(body, slug),
+  };
 }
 
 /** Up to `limit` other published posts, newest first. */

@@ -196,7 +196,7 @@ body {
 }
 
 /* ---------------------------------------------------------------
-   Article prose — used as `prose prose-miho` on insights bodies.
+   Article prose — used as `prose prose-miho` on blog bodies.
 
    The typography plugin's defaults are Tailwind grays on white, which
    is the one thing the brief rules out. This maps every prose variable

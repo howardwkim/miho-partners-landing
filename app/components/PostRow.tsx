@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { AUTHORS } from "@/lib/insights/authors";
-import { formatDate } from "@/lib/insights/format";
-import type { PostSummary } from "@/lib/insights/types";
+import { AUTHORS } from "@/lib/blog/authors";
+import { formatDate } from "@/lib/blog/format";
+import type { PostSummary } from "@/lib/blog/types";
 
 /**
  * One row in the listing, reused by the homepage sampler so there is a single
@@ -22,7 +22,7 @@ export function PostRow({ post }: { post: PostSummary }) {
           optional per post, and a leading thumbnail indents the title only on
           rows that have one — which leaves the list with a ragged left edge.
           Trailing keeps every title aligned whether or not there's art. */}
-      <Link href={`/insights/${post.slug}`} className="flex items-start gap-6">
+      <Link href={`/blog/${post.slug}`} className="flex items-start gap-6">
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
             <span className="font-semibold text-deep">{post.category}</span>

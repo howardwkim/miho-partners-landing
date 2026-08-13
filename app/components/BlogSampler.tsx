@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { PostRow } from "@/app/components/PostRow";
-import { getAllPosts } from "@/lib/insights/posts";
+import { getAllPosts } from "@/lib/blog/posts";
 
 /**
  * Sits between the founders section and the ladder, so the page reads: who we
@@ -10,7 +10,7 @@ import { getAllPosts } from "@/lib/insights/posts";
  *
  * No CTA of its own — every section on this page resolves to the single audit CTA.
  */
-export async function InsightsSampler() {
+export async function BlogSampler() {
   const posts = (await getAllPosts()).slice(0, 3);
   if (posts.length === 0) return null;
 
@@ -21,10 +21,10 @@ export async function InsightsSampler() {
           How we <span className="font-accent italic">think about it</span>
         </h2>
         <Link
-          href="/insights"
+          href="/blog"
           className="text-sm font-medium text-foreground transition-colors hover:text-link"
         >
-          Read all insights &rarr;
+          Read all blog &rarr;
         </Link>
       </div>
 

@@ -7,9 +7,9 @@ import { BookButton } from "@/app/components/BookButton";
 import { PostRow } from "@/app/components/PostRow";
 import { SiteFooter } from "@/app/components/SiteFooter";
 import { SiteNav } from "@/app/components/SiteNav";
-import { AUTHORS } from "@/lib/insights/authors";
-import { formatDate } from "@/lib/insights/format";
-import { getAllPosts, getPost, getRelatedPosts } from "@/lib/insights/posts";
+import { AUTHORS } from "@/lib/blog/authors";
+import { formatDate } from "@/lib/blog/format";
+import { getAllPosts, getPost, getRelatedPosts } from "@/lib/blog/posts";
 
 export const dynamicParams = false;
 
@@ -58,7 +58,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <main className="mx-auto w-full max-w-3xl px-6 pb-8 sm:px-10">
         <header className="reveal py-10 sm:py-14">
           <Link
-            href="/insights"
+            href="/blog"
             className="text-xs font-semibold text-deep transition-colors hover:text-link"
           >
             {meta.category}
@@ -127,7 +127,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       {related.length > 0 ? (
         <section className="reveal mx-auto w-full max-w-3xl px-6 py-14 sm:px-10">
           <h2 className="text-2xl font-light tracking-tight">
-            More <span className="font-accent italic">insights</span>
+            More <span className="font-accent italic">blog</span>
           </h2>
           <div className="mt-6">
             {related.map((p) => (

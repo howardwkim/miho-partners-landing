@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { BookButton } from "./components/BookButton";
-import { InsightsSampler } from "./components/InsightsSampler";
+import { BlogSampler } from "./components/BlogSampler";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteNav } from "./components/SiteNav";
 
@@ -248,8 +248,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Insights sampler */}
-      <InsightsSampler />
+      {/* Blog sampler */}
+      <BlogSampler />
 
       {/* Ladder */}
       <section id="ladder" className="reveal mx-auto w-full max-w-5xl px-6 py-20 sm:px-10">

@@ -3,8 +3,8 @@ import Link from "next/link";
 import { BookButton } from "../components/BookButton";
 import { PostRow } from "../components/PostRow";
 import { Takeaway } from "../components/Takeaway";
-import { AUTHORS } from "@/lib/insights/authors";
-import type { PostSummary } from "@/lib/insights/types";
+import { AUTHORS } from "@/lib/blog/authors";
+import type { PostSummary } from "@/lib/blog/types";
 
 export const metadata: Metadata = {
   title: "Style guide — MiHo Partners",
@@ -257,10 +257,10 @@ export default function Designs() {
         </p>
       </Section>
 
-      <Section id="insights" title="Insights components">
+      <Section id="blog" title="Blog components">
         <p className="mb-10 max-w-2xl text-muted">
-          Used only in the insights section. The listing row is shared between{" "}
-          <code className="text-xs">/insights</code> and the homepage sampler, so there is one row
+          Used only in the blog section. The listing row is shared between{" "}
+          <code className="text-xs">/blog</code> and the homepage sampler, so there is one row
           design rather than two that drift apart.
         </p>
 

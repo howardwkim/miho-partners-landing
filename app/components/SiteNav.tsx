@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 import { BookButton } from "./BookButton";
 
 // Root-relative, not bare fragments. A bare "#offer" resolves against whatever
-// page you're on, so from /insights/<slug> these would silently do nothing.
+// page you're on, so from /blog/<slug> these would silently do nothing.
 const LINKS = [
   { href: "/#offer", label: "The audit" },
   { href: "/#founders", label: "About" },
-  { href: "/insights", label: "Insights" },
+  { href: "/blog", label: "Blog" },
   { href: "/#ladder", label: "Beyond the audit" },
 ];
 

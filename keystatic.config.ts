@@ -1,11 +1,11 @@
 import { config, collection, fields } from "@keystatic/core";
 import { wrapper } from "@keystatic/core/content-components";
 
-import { AUTHOR_IDS } from "./lib/insights/authors";
-import { CATEGORIES } from "./lib/insights/types";
+import { AUTHOR_IDS } from "./lib/blog/authors";
+import { CATEGORIES } from "./lib/blog/types";
 
 /**
- * The browser editor for the insights section, at /keystatic.
+ * The browser editor for the blog section, at /keystatic.
  *
  * It is a second front door onto exactly the same files the repo already holds
  * — saving here commits an .mdx file to GitHub, the push deploys, and the
@@ -14,7 +14,7 @@ import { CATEGORIES } from "./lib/insights/types";
  * reads its metadata from YAML frontmatter, which is what this editor writes.
  *
  * The field list below must stay in step with the build-time validator in
- * lib/insights/posts.ts. Where a value comes from a closed list, it is derived
+ * lib/blog/posts.ts. Where a value comes from a closed list, it is derived
  * from the same constant the validator checks against rather than retyped, so
  * the two cannot drift.
  */
@@ -27,9 +27,9 @@ export default config({
     brand: { name: "MiHO Partners" },
   },
   collections: {
-    insights: collection({
-      label: "Insights",
-      path: "content/insights/*",
+    blog: collection({
+      label: "Blog",
+      path: "content/blog/*",
       slugField: "title",
       format: { contentField: "content" },
       columns: ["title", "date", "author"],
@@ -44,7 +44,7 @@ export default config({
           slug: {
             label: "URL slug",
             description:
-              "The published address: mihopartners.com/insights/<slug>. Never change it after publishing — the old link dies.",
+              "The published address: mihopartners.com/blog/<slug>. Never change it after publishing — the old link dies.",
           },
         }),
         deck: fields.text({
@@ -78,8 +78,8 @@ export default config({
         image: fields.image({
           label: "Header image",
           description: "Optional. Most posts have none.",
-          directory: "public/insights",
-          publicPath: "/insights/",
+          directory: "public/blog",
+          publicPath: "/blog/",
         }),
         imageAlt: fields.text({
           label: "Image description",
@@ -94,7 +94,7 @@ export default config({
           label: "Article",
           description: "The article body. Start headings at level 2 — the title is level 1.",
           options: {
-            image: { directory: "public/insights", publicPath: "/insights/" },
+            image: { directory: "public/blog", publicPath: "/blog/" },
           },
           components: {
             // wrapper, not block: Takeaway holds the article's own markdown as

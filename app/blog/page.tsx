@@ -2,17 +2,17 @@ import type { Metadata } from "next";
 
 import { SiteFooter } from "@/app/components/SiteFooter";
 import { SiteNav } from "@/app/components/SiteNav";
-import { getAllPosts } from "@/lib/insights/posts";
+import { getAllPosts } from "@/lib/blog/posts";
 
-import { InsightsList } from "./InsightsList";
+import { BlogList } from "./BlogList";
 
 export const metadata: Metadata = {
-  title: "Insights — MiHo Partners",
+  title: "Blog — MiHo Partners",
   description:
     "Practical writing on where small businesses lose time, and what to do about it. From Mike Grabham and Howard Kim.",
 };
 
-export default async function InsightsPage() {
+export default async function BlogPage() {
   const posts = await getAllPosts();
 
   return (
@@ -22,7 +22,7 @@ export default async function InsightsPage() {
       <main className="mx-auto w-full max-w-4xl px-6 pb-16 sm:px-10">
         <header className="py-10 sm:py-14">
           <h1 className="text-[2.75rem] font-light leading-[1.08] tracking-tight sm:text-6xl">
-            Insights
+            Blog
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
             What we notice about where small businesses actually lose time &mdash; and what to do
@@ -32,7 +32,7 @@ export default async function InsightsPage() {
           </p>
         </header>
 
-        <InsightsList posts={posts} />
+        <BlogList posts={posts} />
       </main>
 
       <SiteFooter />

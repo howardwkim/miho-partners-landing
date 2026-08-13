@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 
 import { PostRow } from "@/app/components/PostRow";
-import type { Category, PostSummary } from "@/lib/insights/types";
+import type { Category, PostSummary } from "@/lib/blog/types";
 
 type Filter = Category | "All";
 
@@ -15,7 +15,7 @@ type Filter = Category | "All";
  * Only categories that actually have posts get a chip, so the filter never
  * offers a choice that yields nothing.
  */
-export function InsightsList({ posts }: { posts: PostSummary[] }) {
+export function BlogList({ posts }: { posts: PostSummary[] }) {
   const [filter, setFilter] = useState<Filter>("All");
 
   const used = useMemo(() => {

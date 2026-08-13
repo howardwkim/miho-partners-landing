@@ -1,5 +1,5 @@
 /**
- * The one bespoke component in the insights section, and the reason the article
+ * The one bespoke component in the blog section, and the reason the article
  * template is designed rather than lifted.
  *
  * MiHo sells prescription, not diagnosis — the audit's promise is "here is what
