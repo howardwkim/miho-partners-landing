@@ -1,3 +1,19 @@
-ignoredBuiltDependencies:
-  - sharp
-  - unrs-resolver
+# Neither package needs its install script here: sharp resolves a prebuilt
+# @img/sharp-<platform> binary, and unrs-resolver's postinstall only exists to
+# work around an old npm optional-dependency bug pnpm doesn't have.
+#
+# `allowBuilds` is the pnpm 11 spelling. It replaced `ignoredBuiltDependencies`,
+# which pnpm 11 ignores outright — leaving a contributor on 11 with a hard
+# ERR_PNPM_IGNORED_BUILDS failure and a file pnpm rewrites on every install.
+# The packageManager field in package.json pins the version that reads this.
+allowBuilds:
+  sharp: false
+  unrs-resolver: false
+
+# This repo is driven by Claude Code, which runs pnpm without an interactive
+# terminal. When pnpm needs to rebuild node_modules (switching pnpm majors, a
+# changed store layout) it asks permission first, and with no TTY to ask it
+# aborts with ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY instead. Answering in
+# advance keeps installs non-interactive. Only ever removes a regenerable
+# node_modules directory.
+confirmModulesPurge: false
