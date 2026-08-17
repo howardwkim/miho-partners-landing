@@ -235,6 +235,65 @@ export default function Designs() {
         </div>
       </Section>
 
+      <Section id="rules" title="Rules and ruled lists">
+        <p className="mb-10 max-w-2xl text-muted">
+          Structure without boxes. A card is the lazy container &mdash; where a section is a
+          list or a sequence, a hairline does the same job with none of the weight. A hairline
+          is always tinted from the ground it sits on:{" "}
+          <code className="text-xs">ux-gray-2</code> on the page background, and a deep-green
+          tint on the sage surface, where gray would all but disappear.
+        </p>
+
+        <div className="space-y-12">
+          <div>
+            <div className="mb-3 text-lg font-bold">Segmented rule</div>
+            <p className="mb-5 max-w-2xl text-sm text-muted">
+              One rule per column, aligned so they read as a single line broken at the column
+              gaps. The breaks mark the beats. This is why the offer section carries no 01 /
+              02 / 03 &mdash; reading order already gives you the sequence, so numbering it was
+              decoration wearing a job title. Columns are equal, one type size, one rule
+              length: any variation across a set like this reads as a bug, not as emphasis.
+            </p>
+            <div className="rounded-3xl bg-surface p-7">
+              <div className="grid grid-cols-3 gap-x-12">
+                {["A 45-minute call", "One or two specific tools", "A short review call"].map(
+                  (t) => (
+                    <div key={t} className="border-t border-deep/25 pt-6">
+                      <div className="text-lg font-light tracking-tight">{t}</div>
+                    </div>
+                  ),
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div className="mb-3 text-lg font-bold">Ruled list</div>
+            <p className="mb-5 max-w-2xl text-sm text-muted">
+              Term left, description right, a hairline above every row and one closing the
+              list. Used where the content is a menu rather than a sequence &mdash; numbering a
+              menu claims an order the copy doesn&rsquo;t have.
+            </p>
+            <div className="rounded-3xl bg-surface p-7">
+              <dl className="border-b border-deep/15">
+                {[
+                  ["Building the automation itself", "So a task that used to eat an hour a week runs on its own."],
+                  ["An ongoing partnership", "Twice a month, we sit with you and build whatever’s next."],
+                ].map(([term, desc]) => (
+                  <div
+                    key={term}
+                    className="grid grid-cols-[15rem_minmax(0,1fr)] gap-x-10 border-t border-deep/15 py-6"
+                  >
+                    <dt className="text-lg font-light tracking-tight">{term}</dt>
+                    <dd className="text-sm leading-relaxed text-muted">{desc}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </div>
+      </Section>
+
       <Section id="surfaces" title="Surfaces">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <div className="rounded-3xl bg-background p-7 ring-1 ring-ux-gray-2">

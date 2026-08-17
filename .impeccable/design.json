@@ -1,0 +1,534 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17T00:00:00Z",
+  "title": "Design System: MiHo Partners",
+  "extensions": {
+    "colorMeta": {
+      "spring-deep": {
+        "role": "primary",
+        "displayName": "Forest Ink",
+        "canonical": "oklch(40.5% 0.113 149.5)",
+        "tonalRamp": [
+          "#001500",
+          "#003100",
+          "#004f1a",
+          "#226f38",
+          "#469057",
+          "#68b278",
+          "#8ed99c",
+          "#b8ffc6"
+        ]
+      },
+      "spring-cta": {
+        "role": "primary",
+        "displayName": "Signal Green",
+        "canonical": "oklch(54.2% 0.156 146.7)",
+        "tonalRamp": [
+          "#001600",
+          "#003400",
+          "#005300",
+          "#00731d",
+          "#299540",
+          "#51b861",
+          "#79df86",
+          "#a4ffaf"
+        ]
+      },
+      "spring-vibrant": {
+        "role": "primary",
+        "displayName": "Highlighter Lime",
+        "canonical": "oklch(79.3% 0.148 150.7)",
+        "tonalRamp": [
+          "#001700",
+          "#003400",
+          "#005308",
+          "#00732c",
+          "#21954c",
+          "#4cb86d",
+          "#75df91",
+          "#a0ffbb"
+        ]
+      },
+      "spring-vibrant-50": {
+        "role": "primary",
+        "displayName": "Pale Lime",
+        "canonical": "oklch(89.3% 0.076 152.8)",
+        "tonalRamp": [
+          "#001300",
+          "#002e10",
+          "#194b2c",
+          "#396a49",
+          "#598b67",
+          "#7aad88",
+          "#9fd3ad",
+          "#c8fed6"
+        ]
+      },
+      "spring-bright": {
+        "role": "primary",
+        "displayName": "Marker Lime",
+        "canonical": "oklch(97.4% 0.100 114.7)",
+        "tonalRamp": [
+          "#0c0d00",
+          "#242800",
+          "#3f4500",
+          "#5c6412",
+          "#7c8438",
+          "#9da65a",
+          "#c2cc7f",
+          "#ecf7a8"
+        ]
+      },
+      "spring-mute": {
+        "role": "primary",
+        "displayName": "Paper Sage",
+        "canonical": "oklch(95.4% 0.019 119.8)",
+        "tonalRamp": [
+          "#0a0c04",
+          "#23251b",
+          "#3e4136",
+          "#5c5f53",
+          "#7c7f73",
+          "#9da093",
+          "#c2c6b9",
+          "#edf1e3"
+        ]
+      },
+      "fall-deep": {
+        "role": "secondary",
+        "displayName": "Brick",
+        "canonical": "oklch(54.4% 0.160 27.4)",
+        "tonalRamp": [
+          "#360000",
+          "#5b0000",
+          "#800001",
+          "#a52a25",
+          "#cb4f45",
+          "#f17265",
+          "#ff988a",
+          "#ffc3b3"
+        ]
+      },
+      "fall-medium": {
+        "role": "secondary",
+        "displayName": "Tan",
+        "canonical": "oklch(91.5% 0.035 72.9)",
+        "tonalRamp": [
+          "#140800",
+          "#2e2110",
+          "#4b3d2b",
+          "#6a5b48",
+          "#8a7a66",
+          "#ac9b87",
+          "#d3c1ac",
+          "#feebd5"
+        ]
+      },
+      "neutral-mid-1": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "canonical": "oklch(98.8% 0.009 113.2)",
+        "tonalRamp": [
+          "#0b0c07",
+          "#24251f",
+          "#40403b",
+          "#5d5e58",
+          "#7d7e78",
+          "#9e9f99",
+          "#c4c5be",
+          "#eeefe8"
+        ]
+      },
+      "neutral-black": {
+        "role": "neutral",
+        "displayName": "Ink Black",
+        "canonical": "oklch(0% 0.000 0)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#242424",
+          "#404040",
+          "#5d5d5d",
+          "#7d7d7d",
+          "#9e9e9e",
+          "#c4c4c4",
+          "#eeeeee"
+        ]
+      },
+      "prose-body": {
+        "role": "neutral",
+        "displayName": "Reading Ink",
+        "canonical": "oklch(25.5% 0.007 106.9)",
+        "tonalRamp": [
+          "#0b0b08",
+          "#242420",
+          "#40403c",
+          "#5e5e59",
+          "#7e7e79",
+          "#9f9f9a",
+          "#c4c4bf",
+          "#efefe9"
+        ]
+      },
+      "ux-gray-4": {
+        "role": "neutral",
+        "displayName": "Quiet Gray",
+        "canonical": "oklch(58.0% 0.000 90)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#242424",
+          "#404040",
+          "#5d5d5d",
+          "#7d7d7d",
+          "#9e9e9e",
+          "#c4c4c4",
+          "#eeeeee"
+        ]
+      },
+      "ux-gray-2": {
+        "role": "neutral",
+        "displayName": "Rule Gray",
+        "canonical": "oklch(92.8% 0.000 90)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#242424",
+          "#404040",
+          "#5d5d5d",
+          "#7d7d7d",
+          "#9e9e9e",
+          "#c4c4c4",
+          "#eeeeee"
+        ]
+      },
+      "ux-gray-3": {
+        "role": "neutral",
+        "displayName": "Disabled Gray",
+        "canonical": "oklch(75.1% 0.000 90)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#242424",
+          "#404040",
+          "#5d5d5d",
+          "#7d7d7d",
+          "#9e9e9e",
+          "#c4c4c4",
+          "#eeeeee"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "White",
+        "canonical": "oklch(100% 0.000 90)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#242424",
+          "#404040",
+          "#5d5d5d",
+          "#7d7d7d",
+          "#9e9e9e",
+          "#c4c4c4",
+          "#eeeeee"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Page H1 only — hero headline, article title. Always weight 300."
+      },
+      "display-accent": {
+        "displayName": "Display Accent",
+        "purpose": "Instrument Serif italic on the back half of a headline. Never a whole line, never a colour shift."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section H2. Always ends in an italic serif fragment."
+      },
+      "subhead": {
+        "displayName": "Subhead",
+        "purpose": "The step below a section headline — an article H2 and the article deck. The only size between Headline and Title."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Card titles, founder names, objection questions, byline names. The only place bold lives."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "The paragraph directly under a headline, in Quiet Gray."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default running text on the landing page."
+      },
+      "prose": {
+        "displayName": "Article Prose",
+        "purpose": "Long-form article body only, in Reading Ink at 1.75 line-height."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Category, date, reading time, meta lines, captions."
+      }
+    },
+    "shadows": [
+      {
+        "name": "photo-lift",
+        "value": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+        "purpose": "The only shadow on the site. Permitted solely where an element overlaps a photograph — today, the founder caption pill. Never on a card, button, nav, or panel."
+      },
+      {
+        "name": "hairline-ring",
+        "value": "0 0 0 1px #e7e7e7",
+        "purpose": "Structural separator when a surface sits on a ground of its own colour. Not decorative."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state-color",
+        "value": "transition: color 150ms, background-color 150ms, border-color 150ms",
+        "purpose": "The only interaction transition. Colour changes carry every state; nothing scales, lifts, or fades."
+      },
+      {
+        "name": "guarantee-sweep",
+        "value": "animation: 4s linear infinite guarantee-sweep",
+        "purpose": "Clipped-gradient band travelling through the guarantee text. Reserved exclusively for the money-back guarantee. Disabled under prefers-reduced-motion."
+      },
+      {
+        "name": "scroll-reveal",
+        "value": "animation: reveal-in linear both; animation-timeline: view(); animation-range: entry 0% entry 55%",
+        "purpose": "Sections fade in and rise 16px on entry. Pure CSS, @supports-gated so unsupported browsers render the final state."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ],
+    "containers": [
+      {
+        "name": "reading",
+        "value": "768px",
+        "purpose": "Article body and the problem statement."
+      },
+      {
+        "name": "content",
+        "value": "1024px",
+        "purpose": "Every content section on the homepage."
+      },
+      {
+        "name": "wide",
+        "value": "1152px",
+        "purpose": "Nav, hero, footer — the widest thing on the site."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The site's single call to action. Label never varies by section.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#book\">Book your audit</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; background: var(--spring-vibrant, #6cd689); color: var(--neutral-black, #000); font-family: var(--font-sans, 'Manrope'), system-ui, sans-serif; font-size: 15px; font-weight: 600; text-decoration: none; padding: 12px 14px; border-radius: 6px; border: none; transition: background-color 150ms; } .ds-btn-primary:hover { background: var(--spring-vibrant-50, #b6ebc4); } .ds-btn-primary:focus-visible { outline: 2px solid var(--spring-deep, #005924); outline-offset: 2px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Outline variant. Border and text both go Signal Green on hover.",
+      "html": "<a class=\"ds-btn-secondary\" href=\"#\">Secondary</a>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; background: transparent; color: var(--neutral-black, #000); font-family: var(--font-sans, 'Manrope'), system-ui, sans-serif; font-size: 15px; font-weight: 600; text-decoration: none; padding: 12px 14px; border-radius: 6px; border: 1px solid var(--ux-gray-2, #e7e7e7); transition: color 150ms, border-color 150ms; } .ds-btn-secondary:hover { color: var(--spring-cta, #118631); border-color: var(--spring-cta, #118631); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--spring-deep, #005924); outline-offset: 2px; }"
+    },
+    {
+      "name": "Category Chips",
+      "kind": "chip",
+      "refersTo": "chip-selected",
+      "description": "Filters the blog list in place. Only categories that have posts get a chip.",
+      "html": "<div class=\"ds-chiprow\"><button class=\"ds-chip ds-chip-on\" aria-pressed=\"true\">All</button><button class=\"ds-chip\" aria-pressed=\"false\">Time drains</button><button class=\"ds-chip\" aria-pressed=\"false\">AI tools</button></div>",
+      "css": ".ds-chiprow { display: flex; flex-wrap: wrap; gap: 8px; } .ds-chip { font-family: var(--font-sans, 'Manrope'), system-ui, sans-serif; font-size: 14px; font-weight: 500; padding: 7px 12px; border-radius: 6px; cursor: pointer; background: transparent; color: var(--ux-gray-4, #7a7a7a); border: 1px solid var(--ux-gray-2, #e7e7e7); transition: color 150ms, border-color 150ms; } .ds-chip:hover { color: var(--spring-cta, #118631); border-color: var(--spring-cta, #118631); } .ds-chip-on { background: var(--spring-deep, #005924); color: #fff; border-color: var(--spring-deep, #005924); } .ds-chip-on:hover { color: #fff; border-color: var(--spring-deep, #005924); }"
+    },
+    {
+      "name": "Content Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Flat, borderless, 24px radius. Sits on the Paper Sage ground; its fill does the separating.",
+      "html": "<div class=\"ds-cardwrap\"><div class=\"ds-card\"><div class=\"ds-card-num\">01</div><div class=\"ds-card-title\">A 45-minute call</div><p class=\"ds-card-body\">We ask questions, you talk. No pitching, no jargon.</p></div></div>",
+      "css": ".ds-cardwrap { background: var(--spring-mute, #eef2e4); padding: 28px; border-radius: 24px; } .ds-card { background: var(--neutral-mid-1, #fbfcf5); border-radius: 24px; padding: 28px; font-family: var(--font-sans, 'Manrope'), system-ui, sans-serif; color: var(--neutral-black, #000); max-width: 300px; } .ds-card-num { font-family: var(--font-accent, 'Instrument Serif'), Georgia, serif; font-style: italic; font-size: 30px; color: var(--spring-deep, #005924); line-height: 1; } .ds-card-title { margin-top: 12px; font-size: 18px; font-weight: 700; } .ds-card-body { margin: 8px 0 0; font-size: 16px; line-height: 1.625; color: var(--ux-gray-4, #7a7a7a); }"
+    },
+    {
+      "name": "Ink Block",
+      "kind": "card",
+      "refersTo": "card-ink",
+      "description": "The dark ground. Price block and final CTA band. Deep green, never black.",
+      "html": "<div class=\"ds-ink\"><div><div class=\"ds-ink-label\">Price</div><div class=\"ds-ink-price\">$399</div></div><div class=\"ds-ink-body\"><span class=\"ds-ink-strong\">The guarantee: </span>if we can&rsquo;t find you at least 5 hours a week back, you get every dollar back.</div></div>",
+      "css": ".ds-ink { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; background: var(--spring-deep, #005924); color: #fff; border-radius: 24px; padding: 32px; font-family: var(--font-sans, 'Manrope'), system-ui, sans-serif; } .ds-ink-label { font-size: 14px; text-transform: uppercase; letter-spacing: 0.025em; color: rgb(255 255 255 / 0.6); } .ds-ink-price { margin-top: 4px; font-size: 36px; font-weight: 800; line-height: 1; } .ds-ink-body { max-width: 28rem; font-size: 16px; line-height: 1.625; color: rgb(255 255 255 / 0.85); } .ds-ink-strong { font-weight: 600; color: #fff; }"
+    },
+    {
+      "name": "Listing Row",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "One row design shared by /blog and the homepage sampler. Optional trailing thumbnail; the slot collapses rather than reflowing.",
+      "html": "<article class=\"ds-row\"><a class=\"ds-row-link\" href=\"#\"><div class=\"ds-row-meta\"><span class=\"ds-row-cat\">AI tools</span><span aria-hidden=\"true\">&middot;</span><time>July 24, 2026</time><span aria-hidden=\"true\">&middot;</span><span>4 min read</span></div><h3 class=\"ds-row-title\">Most AI tools solve a problem you don&rsquo;t have</h3><p class=\"ds-row-deck\">The question isn&rsquo;t which tool is best. It&rsquo;s which twenty minutes of your week you&rsquo;d pay to never do again.</p><p class=\"ds-row-author\">Howard Kim</p></a></article>",
+      "css": ".ds-row { border-top: 1px solid var(--ux-gray-2, #e7e7e7); padding: 28px 0; font-family: var(--font-sans, 'Manrope'), system-ui, sans-serif; } .ds-row-link { display: block; text-decoration: none; color: var(--neutral-black, #000); } .ds-row-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: 12px; color: var(--ux-gray-4, #7a7a7a); } .ds-row-cat { font-weight: 600; color: var(--spring-deep, #005924); } .ds-row-title { margin: 8px 0 0; font-size: 24px; font-weight: 300; letter-spacing: -0.025em; transition: color 150ms; } .ds-row-link:hover .ds-row-title { color: var(--spring-cta, #118631); } .ds-row-deck { margin: 8px 0 0; max-width: 42rem; font-family: var(--font-accent, 'Instrument Serif'), Georgia, serif; font-style: italic; font-size: 18px; line-height: 1.375; color: var(--ux-gray-4, #7a7a7a); } .ds-row-author { margin: 12px 0 0; font-size: 14px; color: var(--ux-gray-4, #7a7a7a); }"
+    },
+    {
+      "name": "Takeaway Block",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Required in every article. MiHo sells prescription, not diagnosis — this is the structural slot that must hold something concrete.",
+      "html": "<aside class=\"ds-takeaway\"><div class=\"ds-takeaway-title\">Before you buy anything</div><ul class=\"ds-takeaway-list\"><li>Write the task down by hand, in one sentence.</li><li>Time it once, honestly.</li><li>Name who checks it&rsquo;s still running in 60 days.</li></ul></aside>",
+      "css": ".ds-takeaway { background: var(--spring-mute, #eef2e4); border-radius: 24px; padding: 28px; font-family: var(--font-sans, 'Manrope'), system-ui, sans-serif; color: var(--prose-body, #23231f); } .ds-takeaway-title { font-family: var(--font-accent, 'Instrument Serif'), Georgia, serif; font-style: italic; font-size: 30px; line-height: 1.1; color: var(--spring-deep, #005924); margin-bottom: 12px; } .ds-takeaway-list { margin: 0; padding-left: 1.2em; font-size: 17px; line-height: 1.75; } .ds-takeaway-list li::marker { color: var(--spring-vibrant, #6cd689); }"
+    },
+    {
+      "name": "Highlighter Swipe",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Emphasis by hand rather than by scale. One phrase per page — a second halves the value of the first.",
+      "html": "<p class=\"ds-swipe-line\">We find where <span class=\"ds-swipe\">you&rsquo;re losing hours</span>.</p>",
+      "css": ".ds-swipe-line { font-family: var(--font-sans, 'Manrope'), system-ui, sans-serif; font-size: 24px; font-weight: 300; color: var(--neutral-black, #000); margin: 0; } .ds-swipe { background: linear-gradient(180deg, transparent 62%, var(--spring-bright, #f4ffb0) 62%); padding: 0 0.08em; }"
+    },
+    {
+      "name": "Byline",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Face and name carry the trust; the firm sits under it. Explicitly no credential line — under every article that reads as selling rather than writing.",
+      "html": "<div class=\"ds-byline\"><div class=\"ds-byline-avatar\" aria-hidden=\"true\"><svg viewBox=\"0 0 44 44\" width=\"44\" height=\"44\"><circle cx=\"22\" cy=\"22\" r=\"22\" fill=\"#eef2e4\"/><circle cx=\"22\" cy=\"17\" r=\"7\" fill=\"#aeaeae\"/><path d=\"M8 44c0-8 6.3-13 14-13s14 5 14 13z\" fill=\"#aeaeae\"/></svg></div><div><div class=\"ds-byline-name\">Howard Kim</div><div class=\"ds-byline-firm\">MiHo Partners</div><div class=\"ds-byline-meta\">July 24, 2026 &middot; 4 min read</div></div></div>",
+      "css": ".ds-byline { display: flex; align-items: center; gap: 16px; border-top: 1px solid var(--ux-gray-2, #e7e7e7); padding-top: 24px; font-family: var(--font-sans, 'Manrope'), system-ui, sans-serif; } .ds-byline-avatar { flex: 0 0 auto; width: 44px; height: 44px; border-radius: 9999px; overflow: hidden; } .ds-byline-name { font-size: 14px; font-weight: 700; color: var(--neutral-black, #000); } .ds-byline-firm { font-size: 14px; color: var(--ux-gray-4, #7a7a7a); } .ds-byline-meta { margin-top: 2px; font-size: 12px; color: var(--ux-gray-4, #7a7a7a); }"
+    },
+    {
+      "name": "Segmented Rule",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "One hairline per column, aligned into a single line broken at the gaps. The breaks mark the beats, which is what lets the offer sequence drop its 01/02/03. Equal columns at one type size — variation across a set read as one line reads as a bug, not emphasis.",
+      "html": "<div class=\"ds-segrule\"><div class=\"ds-segrule-col\"><div class=\"ds-segrule-h\">A 45-minute call</div><p class=\"ds-segrule-p\">We ask questions, you talk.</p></div><div class=\"ds-segrule-col\"><div class=\"ds-segrule-h\">One or two specific tools</div><p class=\"ds-segrule-p\">Picked for your business.</p></div><div class=\"ds-segrule-col\"><div class=\"ds-segrule-h\">A short review call</div><p class=\"ds-segrule-p\">We walk through what to install first.</p></div></div>",
+      "css": ".ds-segrule { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 48px; background: var(--spring-mute, #eef2e4); padding: 28px; border-radius: 24px; font-family: var(--font-sans, 'Manrope'), system-ui, sans-serif; } .ds-segrule-col { border-top: 1px solid color-mix(in srgb, var(--spring-deep, #005924) 25%, transparent); padding-top: 24px; } .ds-segrule-h { font-size: 20px; font-weight: 300; letter-spacing: -0.025em; color: var(--neutral-black, #000); } .ds-segrule-p { margin: 12px 0 0; font-size: 15px; line-height: 1.625; color: var(--ux-gray-4, #7a7a7a); }"
+    },
+    {
+      "name": "Ruled List",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Term left, description right, a hairline above every row and one closing the list. For content that is a menu rather than a sequence — numbering a menu claims an order the copy doesn't have.",
+      "html": "<dl class=\"ds-ruledlist\"><div class=\"ds-ruledlist-row\"><dt class=\"ds-ruledlist-t\">Building the automation itself</dt><dd class=\"ds-ruledlist-d\">So a task that used to eat an hour a week runs on its own.</dd></div><div class=\"ds-ruledlist-row\"><dt class=\"ds-ruledlist-t\">An ongoing partnership</dt><dd class=\"ds-ruledlist-d\">Twice a month, we sit with you and build whatever&rsquo;s next.</dd></div></dl>",
+      "css": ".ds-ruledlist { margin: 0; background: var(--spring-mute, #eef2e4); padding: 28px; border-radius: 24px; font-family: var(--font-sans, 'Manrope'), system-ui, sans-serif; } .ds-ruledlist-row { display: grid; grid-template-columns: 15rem minmax(0, 1fr); column-gap: 40px; padding: 24px 0; border-top: 1px solid color-mix(in srgb, var(--spring-deep, #005924) 15%, transparent); } .ds-ruledlist-row:last-child { border-bottom: 1px solid color-mix(in srgb, var(--spring-deep, #005924) 15%, transparent); } .ds-ruledlist-t { margin: 0; font-size: 20px; font-weight: 300; letter-spacing: -0.025em; color: var(--neutral-black, #000); } .ds-ruledlist-d { margin: 0; font-size: 15px; line-height: 1.625; color: var(--ux-gray-4, #7a7a7a); }"
+    },
+    {
+      "name": "Site Nav",
+      "kind": "nav",
+      "refersTo": null,
+      "description": "Transparent header on the page ground. Wordmark left, four links, primary button right. Collapses to a hamburger below 640px.",
+      "html": "<header class=\"ds-nav\"><a class=\"ds-nav-mark\" href=\"/\">MiHo <span class=\"ds-nav-mark-accent\">Partners</span></a><nav class=\"ds-nav-links\"><a href=\"#\">The audit</a><a href=\"#\">About</a><a href=\"#\">Blog</a><a href=\"#\">Beyond the audit</a></nav><a class=\"ds-nav-cta\" href=\"#\">Book your audit</a></header>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; gap: 32px; background: var(--neutral-mid-1, #fbfcf5); padding: 28px 24px; font-family: var(--font-sans, 'Manrope'), system-ui, sans-serif; } .ds-nav-mark { font-size: 18px; font-weight: 800; letter-spacing: -0.025em; color: var(--neutral-black, #000); text-decoration: none; } .ds-nav-mark-accent { font-family: var(--font-accent, 'Instrument Serif'), Georgia, serif; font-style: italic; font-weight: 400; } .ds-nav-links { display: flex; align-items: center; gap: 32px; font-size: 14px; font-weight: 500; } .ds-nav-links a { color: var(--neutral-black, #000); text-decoration: none; transition: color 150ms; } .ds-nav-links a:hover { color: var(--spring-cta, #118631); } .ds-nav-cta { display: inline-flex; align-items: center; white-space: nowrap; background: var(--spring-vibrant, #6cd689); color: var(--neutral-black, #000); font-size: 15px; font-weight: 600; text-decoration: none; padding: 12px 14px; border-radius: 6px; transition: background-color 150ms; } .ds-nav-cta:hover { background: var(--spring-vibrant-50, #b6ebc4); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Operator's Notebook",
+    "overview": "This is what a working person's desk looks like, not what a software company's website looks like. The ground is warm paper — an off-white with green in it, never the flat white of a template. Type is set light and large, the way you'd write a sentence you meant. And where something matters, it isn't made bigger or bolder: it's marked by hand, with a lime highlighter swipe under the phrase. That gesture is the whole thesis. A two-person firm with no client roster can't lean on a logo wall or a metrics bar, so it leans on the evidence of a person who has done the work and is pointing at the part that counts.\n\nThe system is deliberately anti-two-things at once. It rejects the saturated AI-startup look — no near-black grounds, no monospace, no purple-to-orange gradients, no glow, no grid overlays — because that category is crowded and looking different is itself an asset. It equally rejects professional-services beige: the accountant-or-law-firm register that reads as safe and boring. What's left is a narrow, warm middle: modern and clean, but restrained, with one confident green doing the pointing and everything else staying quiet.\n\nDensity is generous throughout. Sections breathe at 80px, cards hold 28px of internal air, and content columns cap at 768px for reading and 1024–1152px for layout. Nothing floats — surfaces sit flat on their ground and change depth by changing color, not by casting a shadow. The founders' faces appear in the first viewport at equal size and eye-line, which is the single most load-bearing trust device on the site and the reason the hero is a portrait ring rather than a product shot.",
+    "keyCharacteristics": [
+      "Warm off-white paper ground (#fbfcf5), never pure white, never dark",
+      "Light-weight (300) display type at large sizes, with tight tracking",
+      "Instrument Serif italic as the editorial accent — the back half of a headline only",
+      "One confident green (#6cd689) carrying every call to action",
+      "Emphasis marked by hand (highlighter swipe), not by scale or weight",
+      "Flat surfaces; depth is three stacked grounds, not elevation",
+      "Faces over logos, names over metrics, boutique over venture scale"
+    ],
+    "rules": [
+      {
+        "name": "The One Green Rule",
+        "body": "Highlighter Lime (#6cd689) appears on primary buttons and nowhere else. Every other green on a page is a ground, a link, or a marker. A second element wearing the CTA green means the page now has two calls to action, which the product forbids.",
+        "section": "colors"
+      },
+      {
+        "name": "The Never-White, Never-Black Ground Rule",
+        "body": "The light ground is Warm Paper (#fbfcf5) and the dark ground is Forest Ink (#005924). Pure white exists only as text on dark; pure black exists only as text. A #ffffff or #000000 background is always a defect.",
+        "section": "colors"
+      },
+      {
+        "name": "The Warm Ration Rule",
+        "body": "Fall tones only appear behind or beside a photograph, or on a status badge. If a warm tone is carrying meaning a green could carry, it is wrong.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ground-Tinted Hairline Rule",
+        "body": "A hairline is tinted from the ground it sits on — Rule Gray on Warm Paper, a Forest Ink tint on Paper Sage. A hairline you have to hunt for is not doing its job, and a hairline that fights its ground is not a hairline.",
+        "section": "colors"
+      },
+      {
+        "name": "The Back-Half Rule",
+        "body": "Instrument Serif italic takes the back half of a headline — \"Where it goes from here\", \"Fair questions\" — never a whole line, and never with a color shift. The accent is carried by font and italic alone. A fully-italic heading or a colored italic breaks it.",
+        "section": "typography"
+      },
+      {
+        "name": "The Light-Heading Rule",
+        "body": "Size and weight move in opposite directions. Anything 30px or larger is weight 300; bold (700) is reserved for 18–20px titles and names. A bold 40px heading has never appeared on this site and shouldn't.",
+        "section": "typography"
+      },
+      {
+        "name": "The Hand-Marked Emphasis Rule",
+        "body": "Importance is signaled by the highlighter swipe, not by scale, weight, or color. One swiped phrase per page — a second one halves the value of the first.",
+        "section": "typography"
+      },
+      {
+        "name": "The Two-Ground Alternation Rule",
+        "body": "Consecutive sections never share a ground. If a new section lands next to one of the same color, it needs a different ground or it needs to merge with its neighbor.",
+        "section": "layout"
+      },
+      {
+        "name": "The Ground-Stacking Rule",
+        "body": "A section changes depth by changing its ground, never by lifting off it. Three grounds is the whole vocabulary.",
+        "section": "elevation"
+      },
+      {
+        "name": "The One Lift Rule",
+        "body": "A shadow needs a photograph under it. If nothing is overlapping an image, there is no shadow.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Two-Radius Rule",
+        "body": "24px holds content, 6px gets clicked, circles hold faces. Anything in between needs a reason stated where it's introduced.",
+        "section": "shapes"
+      },
+      {
+        "name": "The Hover-Lightens Rule",
+        "body": "The primary button lightens on hover. It never darkens, and it never moves.",
+        "section": "components"
+      },
+      {
+        "name": "The Color-Is-The-Signal Rule",
+        "body": "State changes are carried by color. Never opacity alone, never underline alone, never transform, never shadow.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do ground every section in Warm Paper (#fbfcf5), Paper Sage (#eef2e4), or Forest Ink (#005924), alternating so consecutive sections never share one.",
+      "Do set every heading 30px and up at weight 300 with -0.025em tracking, and end it with an Instrument Serif italic fragment.",
+      "Do resolve every button and section to the single call to action, \"Book your audit.\"",
+      "Do use color as the only state signal — 150ms color transitions on hover, nothing that moves or lifts.",
+      "Do keep content cards flat, borderless, and filled: 24px radius, 28px padding, fill contrasting with the section ground.",
+      "Do cap reading columns at 768px and layout columns at 1024–1152px.",
+      "Do add a /designs entry in the same change that introduces any new component, color, or device. Anything on the site not documented there is ad hoc."
+    ],
+    "donts": [
+      "Don't use a pure white (#ffffff) or near-black background anywhere. White is text-on-dark; black is text.",
+      "Don't reuse the guarantee gradient sweep on anything but the money-back guarantee, or the highlighter swipe more than once per page.",
+      "Don't put Highlighter Lime (#6cd689) on anything but a primary button.",
+      "Don't add shadows to cards, buttons, chips, or nav. A shadow requires a photograph underneath it.",
+      "Don't reach for the saturated AI-startup register: near-black grounds, monospace or terminal type, purple-to-orange gradients, glow, or grid overlays. The warm fall family is admitted to the palette and is not covered by the gradient ban.",
+      "Don't drift into the professional-services register either — stock office imagery, navy-and-gray, serif-authority letterhead.",
+      "Don't introduce venture-scale trust devices: logo walls, client counts, award laurels, press bars, or enterprise mega-menus. This is a two-person firm and reads as one on purpose.",
+      "Don't fabricate testimonials, client logos, or results. There are none yet, and the testimonial component is parked in /designs specifically because it needs real quotes.",
+      "Don't number a list. 01 / 02 / 03 is decoration wearing a job title — reading order already carries sequence, and numbering a menu claims an order the copy doesn't have. If the slot genuinely needs to carry something, make it carry a fact.",
+      "Don't wrap a list or a sequence in cards. Reach for a rule first; the card is what you fall back to when the content needs a ground of its own.",
+      "Don't put a label above a value that announces what the value is (\"PRICE\" over \"$399\"). Delete the label.",
+      "Don't set an italic serif heading in a color other than the surrounding text, or italicize a full line.",
+      "Don't darken the primary button on hover, or animate it with transform."
+    ]
+  }
+}

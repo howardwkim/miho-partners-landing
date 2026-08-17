@@ -101,6 +101,45 @@ body {
 }
 
 /* ---------------------------------------------------------------
+   Browser surfaces. Selection, caret and focus are part of the
+   design; left alone they render in the operating system's blue on
+   a page that has no blue in it.
+
+   Selection uses the same bright lime as the highlighter swipe, so
+   selecting text and marking text look like the same gesture.
+   --------------------------------------------------------------- */
+::selection {
+  background: var(--spring-bright);
+  color: var(--neutral-black);
+}
+
+/* On the dark green grounds the lime-on-black selection still reads,
+   but the caret has to flip or it vanishes into the ground. */
+:root {
+  caret-color: var(--spring-deep);
+}
+
+.bg-ink,
+[class*="bg-ink"] {
+  caret-color: var(--spring-vibrant);
+}
+
+/* Keyboard focus only — :focus-visible keeps mouse clicks from
+   drawing a ring, which is why this isn't :focus. */
+:focus-visible {
+  outline: 2px solid var(--spring-deep);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* The ring has to change colour on the deep green sections or it
+   disappears into them. */
+.bg-ink :focus-visible,
+[class*="bg-ink"] :focus-visible {
+  outline-color: var(--spring-vibrant);
+}
+
+/* ---------------------------------------------------------------
    Guarantee sweep — clipped-gradient text animation swiped from
    design/extractions/beside-hero (beside.com). Colour band is theirs
    verbatim: ink -> blue -> red -> orange -> ink.
