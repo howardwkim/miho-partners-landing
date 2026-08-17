@@ -295,38 +295,35 @@ export function HomePage({ proportions = "current" }: { proportions?: Proportion
         <div className="mx-auto w-full max-w-5xl px-6 sm:px-10">
           <h2 className="text-3xl font-light tracking-tight sm:text-4xl">Who&rsquo;s behind this</h2>
 
-          {/* Ruled rows, not cards — the same structure the ladder uses. The two
-              bios are different lengths and always will be; inside a pair of
-              cards that difference shows up as ragged boxes, and here it doesn't
-              show up at all. Mike's bio was cut to roughly Howard's length so the
-              section reads as two people, not one profile and one footnote. */}
-          <dl className="mt-12 border-b border-deep/15">
+          {/* A pair, not a list. This was ruled rows briefly and that was wrong:
+              it was the same markup as the ladder four sections down, and two of
+              anything is the one length at which a list is never the right shape.
+              No rules and no boxes — the unequal bio lengths simply end at
+              different heights, which is what two people writing different
+              amounts looks like. It only read as ragged when a box was drawn
+              around it.
+
+              Portraits are squared rather than circular so they don't restate
+              the hero's circle, and kept small — they identify the person, they
+              aren't the subject of the section. */}
+          <div className="mt-12 grid grid-cols-1 gap-x-12 gap-y-12 sm:grid-cols-2">
             {FOUNDERS.map((f) => (
-              <div
-                key={f.name}
-                className="grid grid-cols-1 gap-x-10 gap-y-4 border-t border-deep/15 py-8 sm:grid-cols-[19rem_minmax(0,1fr)]"
-              >
-                <dt className="flex items-start gap-4">
-                  <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full">
-                    <Image src={f.img} alt={f.name} fill sizes="56px" className="object-cover" />
-                  </div>
-                  <div className="min-w-0">
-                    <div className="text-xl font-light tracking-tight">{f.name}</div>
-                    <div className="mt-1 text-sm leading-snug text-muted">{f.role}</div>
-                  </div>
-                </dt>
-                <dd className="max-w-xl">
-                  <p className="leading-relaxed text-muted">{f.bio}</p>
-                  <a
-                    href={`mailto:${f.email}`}
-                    className="mt-3 inline-block text-sm font-medium text-link transition-colors hover:text-deep"
-                  >
-                    {f.email}
-                  </a>
-                </dd>
+              <div key={f.name}>
+                <div className="relative aspect-[4/5] w-28 overflow-hidden rounded-sm bg-background">
+                  <Image src={f.img} alt={f.name} fill sizes="112px" className="object-cover" />
+                </div>
+                <div className="mt-5 text-xl font-light tracking-tight">{f.name}</div>
+                <div className="mt-1 text-sm leading-snug text-muted">{f.role}</div>
+                <p className="mt-4 max-w-md leading-relaxed text-muted">{f.bio}</p>
+                <a
+                  href={`mailto:${f.email}`}
+                  className="mt-3 inline-block text-sm font-medium text-link transition-colors hover:text-deep"
+                >
+                  {f.email}
+                </a>
               </div>
             ))}
-          </dl>
+          </div>
         </div>
       </section>
 
