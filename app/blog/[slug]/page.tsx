@@ -120,7 +120,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               money back.
             </p>
           </div>
-          <BookButton />
+          <BookButton utm={{ source: "blog", medium: "cta", campaign: slug }} />
         </div>
       </section>
 
