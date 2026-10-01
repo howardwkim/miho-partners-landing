@@ -214,9 +214,9 @@ export default function Designs() {
               does the separating. Below 640px it becomes a full-screen sheet. Built on a native{" "}
               <code className="text-xs">&lt;dialog&gt;</code>: focus stays inside, Esc, the
               &times; and a backdrop click all close it, the page behind doesn&rsquo;t scroll,
-              and focus returns to the button that opened it. Focus opens on the Email field;
-              on a phone the sheet shrinks to the space above the keyboard and scrolls, so the
-              submit stays in reach. The &times; is the last tab stop, and focus rings show for
+              and focus returns to the button that opened it. Focus opens on the title, not a
+              field, so a phone keyboard waits for a tap; nothing is pinned, and the submit sits
+              under the last field. The &times; is the last tab stop, and focus rings show for
               keyboard users only, never after a click or tap. The thank-you shows inside the
               modal. Try it:
             </p>
@@ -228,8 +228,8 @@ export default function Designs() {
             <p className="mb-5 max-w-2xl text-sm text-muted">
               What the modal holds. Hairline Rule Gray fields that go Signal Green on focus, 6px
               radius like anything else you click, and the primary button as the submit, label
-              unchanged. Email comes first, then a single Name field; both are required. Business name carries an
-              &ldquo;(optional)&rdquo; label. Return moves Email to Name to Business name, and
+              unchanged. A single Name field comes first, then Email; both are required. Business name carries an
+              &ldquo;(optional)&rdquo; label. Return moves Name to Email to Business name, and
               submits from there. On phones the fields shrink to 44px, the smallest tap
               target, so the submit stays in view under the last field with the keyboard up. Errors are Brick, the one
               place a warm tone signals status outside a badge. Submit is never disabled: a submit

@@ -459,14 +459,14 @@ article's prose styling rather than defining its own.
   the close button, so the whole form and its submit fit one phone screen (checked down to
   375×667) with the keyboard closed. Native `<dialog>`: focus
   stays inside, Esc / close button / backdrop click close it, page scroll locks, focus
-  returns to the opener. Focus opens on the Email field (on phones this raises the
-  keyboard at once); the sheet then shrinks to the area above the keyboard and scrolls, so
-  the submit stays reachable. The close button is the last tab stop. Focus rings show for
+  returns to the opener. Focus opens on the title, not a field, so no phone keyboard
+  appears until the visitor taps one. Nothing tracks the keyboard: the submit sits in
+  normal flow under the last field and the sheet scrolls like a page. The close button is the last tab stop. Focus rings show for
   keyboard focus only (`:focus-visible`), never after a click or tap. The thank-you
   replaces the form inside the modal.
-- **Fields:** Email, Name, Business name (optional), in that order; one Name field, not
-  first and last. Return on Email or Name moves to the next field (`enterkeyhint="next"`);
-  Return on Business name submits (`enterkeyhint="go"`). Autofill: `email`, `name`,
+- **Fields:** Name, Email, Business name (optional), in that order; one Name field, not
+  first and last. Return on Name or Email moves to the next field (`enterkeyhint="next"`);
+  Return on Business name submits (`enterkeyhint="go"`). Autofill: `name`, `email`,
   `organization`. On phones the fields are compact: 44px tall (the minimum tap target),
   10px apart, so the submit sits in view under Business name even with the keyboard up. The
   submit is never pinned to the bottom. Rule Gray hairline, 6px radius, border goes Signal Green on focus. Labels are

@@ -15,12 +15,11 @@ import { BookForm, type BookSource } from "./BookForm";
    focus goes back to the button that opened it. Below 640px it's a full-screen
    sheet; above, a Warm Paper card on a Forest Ink scrim.
 
-   Focus opens on the Email field. It's moved inside the click that opened the
-   modal, since iOS only raises the keyboard for focus given during a tap. The
-   sheet then shrinks to the area above the keyboard (visualViewport), so the
-   form scrolls inside it and the submit stays reachable. The × comes after the
-   form in the DOM, so it's the last tab stop, and shows a ring only for
-   keyboard focus (the global :focus-visible rule).
+   Focus opens on the heading, not a field, so no phone keyboard comes up until
+   the visitor taps one. Nothing tracks the keyboard: the submit sits in normal
+   flow under the last field and the sheet scrolls like a page. The × comes
+   after the form in the DOM, so it's the last tab stop, and shows a ring only
+   for keyboard focus (the global :focus-visible rule).
 
    Mounted once in the root layout; buttons reach it through useBookModal().
    --------------------------------------------------------------------------- */
@@ -44,7 +43,7 @@ export function BookModalProvider({ children }: { children: React.ReactNode }) {
 
   const openModal = useCallback<OpenBookModal>((src) => {
     opener.current = document.activeElement as HTMLElement | null;
-    // Render the form now, so it can be opened and focused within this click.
+    // Render the form now, so the heading exists to take focus.
     flushSync(() => {
       setSource(src);
       setSession((n) => n + 1);
@@ -53,7 +52,7 @@ export function BookModalProvider({ children }: { children: React.ReactNode }) {
     const dialog = ref.current;
     if (!dialog) return;
     if (!dialog.open) dialog.showModal();
-    dialog.querySelector<HTMLInputElement>('input[name="email"]')?.focus();
+    dialog.querySelector<HTMLElement>("#book-modal-title")?.focus();
   }, []);
 
   useEffect(() => {
@@ -62,28 +61,8 @@ export function BookModalProvider({ children }: { children: React.ReactNode }) {
     // On <html>, not <body>: the mobile nav locks <body> and would unlock it under us.
     const root = document.documentElement;
     root.style.overflow = "hidden";
-
-    // Phone sheet: fit the visible area, which the on-screen keyboard shrinks.
-    const vv = window.visualViewport;
-    const sheet = window.matchMedia("(max-width: 639px)");
-    const fit = () => {
-      if (vv && sheet.matches) {
-        dialog.style.height = `${vv.height}px`;
-        dialog.style.top = `${vv.offsetTop}px`;
-      } else {
-        dialog.style.height = "";
-        dialog.style.top = "";
-      }
-    };
-    fit();
-    vv?.addEventListener("resize", fit);
-    vv?.addEventListener("scroll", fit);
     return () => {
       root.style.overflow = "";
-      vv?.removeEventListener("resize", fit);
-      vv?.removeEventListener("scroll", fit);
-      dialog.style.height = "";
-      dialog.style.top = "";
     };
   }, [open]);
 
@@ -108,10 +87,10 @@ export function BookModalProvider({ children }: { children: React.ReactNode }) {
           if (e.target === e.currentTarget) e.currentTarget.close();
         }}
         // The native dialog lets Tab leave for the browser's own UI; wrap instead,
-        // from the × (last) back to Email (first), and the reverse on Shift+Tab.
+        // from the × (last) back to Name (first), and the reverse on Shift+Tab.
         onKeyDown={(e) => {
           if (e.key !== "Tab") return;
-          const first = e.currentTarget.querySelector<HTMLElement>('input[name="email"]');
+          const first = e.currentTarget.querySelector<HTMLElement>('input[name="name"]');
           const last = e.currentTarget.querySelector<HTMLElement>('button[aria-label="Close"]');
           const target = e.shiftKey
             ? document.activeElement === first && last
@@ -127,7 +106,11 @@ export function BookModalProvider({ children }: { children: React.ReactNode }) {
           <div className="relative min-h-full px-5 pt-[max(1rem,env(safe-area-inset-top))] pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:p-8">
             {/* Title and close share a row so the form fits one phone screen;
                 the × is placed there but sits last in the DOM. */}
-            <h2 id="book-modal-title" className="pt-1 pr-12 text-3xl font-light tracking-tight">
+            <h2
+              id="book-modal-title"
+              tabIndex={-1}
+              className="pt-1 outline-none pr-12 text-3xl font-light tracking-tight"
+            >
               Book your <span className="font-accent italic">audit</span>
             </h2>
             <p className="mt-1 text-muted sm:mt-3">
