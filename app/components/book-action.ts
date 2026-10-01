@@ -9,7 +9,8 @@
 
    Env (Vercel, never git):
      RESEND_API_KEY     required for email
-     CONTACT_TO         defaults to hello@mihopartners.com
+     CONTACT_TO         comma-separated recipients; defaults to
+                        hello@mihopartners.com
      CONTACT_FROM       defaults to "MiHo Partners <form@mihopartners.com>";
                         the domain has to be verified in Resend
      SLACK_WEBHOOK_URL  optional
@@ -32,7 +33,11 @@ export type Field = "name" | "email" | "business" | "message";
 const LIMITS: Record<Field, number> = { name: 120, email: 200, business: 160, message: 4000 };
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const TO = process.env.CONTACT_TO || "hello@mihopartners.com";
+const INBOX = "hello@mihopartners.com";
+const TO = (process.env.CONTACT_TO || INBOX)
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
 const FROM = process.env.CONTACT_FROM || "MiHo Partners <form@mihopartners.com>";
 
 export async function submitBookForm(
@@ -68,7 +73,7 @@ export async function submitBookForm(
   if (!delivered) {
     return {
       status: "error",
-      message: `That didn't go through on our end. Email us at ${TO} and we'll pick it up from there.`,
+      message: `That didn't go through on our end. Email us at ${INBOX} and we'll pick it up from there.`,
       values,
     };
   }
@@ -98,7 +103,7 @@ async function sendEmail(v: Record<Field, string>): Promise<boolean> {
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       from: FROM,
-      to: [TO],
+      to: TO,
       reply_to: v.email,
       subject: `Audit request: ${v.name}, ${v.business}`,
       text: summary(v),
