@@ -10,8 +10,9 @@ import { submitBookForm, type BookFormState, type Field } from "./book-action";
    The form inside the booking modal. Warm Paper ground: Rule Gray hairline
    fields that go Signal Green on focus, black labels, and the one primary
    button as the submit, keeping the site's single CTA label. Email comes
-   first, then Name; both are required. The other two say "(optional)" in
-   their label.
+   first, then Name; both are required. Business name says "(optional)" in
+   its label. Return on Email or Name moves to the next field; Return on
+   Business name submits.
 
    Validation stays out of the way until submit. The button is never disabled
    for a bad field: a submit checks the fields with the browser's own rules
@@ -21,8 +22,9 @@ import { submitBookForm, type BookFormState, type Field } from "./book-action";
    ("Did you mean name@gmail.com?") that never blocks.
    --------------------------------------------------------------------------- */
 
+// Phones get a compact field (44px tall, the minimum tap target); 16px text so iOS doesn't zoom.
 const INPUT =
-  "mt-2 block w-full rounded-md border border-ux-gray-2 bg-background px-[14px] py-[10px] text-base text-foreground transition-colors placeholder:text-muted focus:border-link focus:outline-none aria-[invalid=true]:border-warm-deep";
+  "mt-1 block min-h-11 w-full rounded-md border border-ux-gray-2 bg-background px-3 py-2 text-base sm:mt-2 sm:px-[14px] sm:py-[10px] text-foreground transition-colors placeholder:text-muted focus:border-link focus:outline-none aria-[invalid=true]:border-warm-deep";
 
 const OPTIONAL = <span className="font-normal text-muted"> (optional)</span>;
 
@@ -34,7 +36,7 @@ const INITIAL: BookFormState = { status: "idle" };
 type Errors = Partial<Record<Field, string>>;
 
 /** The browser's verdict on a field, in our words. */
-function clientError(el: HTMLInputElement | HTMLTextAreaElement): string | undefined {
+function clientError(el: HTMLInputElement): string | undefined {
   const v = el.validity;
   if (el.name === "name" && v.valueMissing) return "We need a name to write back to.";
   if (el.name === "email" && v.valueMissing) return "We need an email to write back to.";
@@ -84,7 +86,7 @@ export function BookForm({ source }: { source?: BookSource }) {
       onSubmit={(e) => {
         const found: Errors = {};
         for (const el of Array.from(e.currentTarget.elements)) {
-          if (!(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement)) continue;
+          if (!(el instanceof HTMLInputElement)) continue;
           const msg = clientError(el);
           if (msg) found[el.name as Field] = msg;
         }
@@ -97,13 +99,14 @@ export function BookForm({ source }: { source?: BookSource }) {
         }
       }}
     >
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5">
+      <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-5">
         <Input
           name="email"
           label="Email"
           type="email"
           required
           autoComplete="email"
+          enterKeyHint="next"
           values={values}
           errors={errors}
           onBlur={(e) => setSuggestion(suggestEmail({ email: e.target.value.trim() })?.full ?? null)}
@@ -111,7 +114,7 @@ export function BookForm({ source }: { source?: BookSource }) {
           {suggestion && (
             <button
               type="button"
-              className="mt-1 block min-h-11 text-left text-sm font-normal text-link underline underline-offset-2"
+              className="block min-h-11 text-left text-sm font-normal text-link underline underline-offset-2"
               onClick={() => {
                 const input = formRef.current?.elements.namedItem("email");
                 if (input instanceof HTMLInputElement) input.value = suggestion;
@@ -122,28 +125,26 @@ export function BookForm({ source }: { source?: BookSource }) {
             </button>
           )}
         </Input>
-        <Input name="name" label="Name" required autoComplete="name" values={values} errors={errors} />
-      </div>
-      <div className="mt-3 sm:mt-5">
         <Input
-          name="business"
-          label={<>Business name{OPTIONAL}</>}
-          autoComplete="organization"
+          name="name"
+          label="Name"
+          required
+          autoComplete="name"
+          enterKeyHint="next"
           values={values}
           errors={errors}
         />
       </div>
-      <label className="mt-3 block text-sm font-semibold sm:mt-5">
-        What eats your time?{OPTIONAL}
-        <textarea
-          name="message"
-          rows={3}
-          maxLength={4000}
-          defaultValue={values?.message}
-          placeholder="The task you'd happily never do again."
-          className={`${INPUT} resize-y`}
+      <div className="mt-2.5 sm:mt-5">
+        <Input
+          name="business"
+          label={<>Business name{OPTIONAL}</>}
+          autoComplete="organization"
+          enterKeyHint="go"
+          values={values}
+          errors={errors}
         />
-      </label>
+      </div>
 
       {/* Honeypot. Off-screen rather than display:none, which some bots skip. */}
       <div aria-hidden="true" className="absolute -left-[10000px] h-px w-px overflow-hidden">
@@ -178,10 +179,12 @@ export function BookForm({ source }: { source?: BookSource }) {
   );
 }
 
-const MAX_LENGTH: Record<Field, number> = { name: 120, email: 200, business: 160, message: 4000 };
+const MAX_LENGTH: Record<Field, number> = { name: 120, email: 200, business: 160 };
+
+const ORDER: Field[] = ["email", "name", "business"];
 
 function focusFirst(form: HTMLFormElement | null, errors: Errors) {
-  const first = (["email", "name", "business", "message"] as Field[]).find((f) => errors[f]);
+  const first = ORDER.find((f) => errors[f]);
   const el = first && form?.elements.namedItem(first);
   if (el instanceof HTMLElement) el.focus();
 }
@@ -192,6 +195,7 @@ function Input({
   type = "text",
   required = false,
   autoComplete,
+  enterKeyHint,
   values,
   errors,
   onBlur,
@@ -202,6 +206,8 @@ function Input({
   type?: string;
   required?: boolean;
   autoComplete?: string;
+  /** "next" makes Return move to the following field instead of submitting. */
+  enterKeyHint?: "next" | "go";
   values?: Record<Field, string>;
   errors: Errors;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
@@ -220,6 +226,19 @@ function Input({
           required={required}
           maxLength={MAX_LENGTH[name]}
           autoComplete={autoComplete}
+          enterKeyHint={enterKeyHint}
+          onKeyDown={
+            enterKeyHint === "next"
+              ? (e) => {
+                  if (e.key !== "Enter" || e.nativeEvent.isComposing) return;
+                  const next = e.currentTarget.form?.elements.namedItem(ORDER[ORDER.indexOf(name) + 1]);
+                  if (next instanceof HTMLElement) {
+                    e.preventDefault();
+                    next.focus();
+                  }
+                }
+              : undefined
+          }
           defaultValue={values?.[name]}
           onBlur={onBlur}
           aria-invalid={error ? true : undefined}

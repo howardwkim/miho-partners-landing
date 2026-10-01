@@ -228,8 +228,10 @@ export default function Designs() {
             <p className="mb-5 max-w-2xl text-sm text-muted">
               What the modal holds. Hairline Rule Gray fields that go Signal Green on focus, 6px
               radius like anything else you click, and the primary button as the submit, label
-              unchanged. Email comes first, then a single Name field; both are required. Business name and &ldquo;What eats your
-              time?&rdquo; carry an &ldquo;(optional)&rdquo; label. Errors are Brick, the one
+              unchanged. Email comes first, then a single Name field; both are required. Business name carries an
+              &ldquo;(optional)&rdquo; label. Return moves Email to Name to Business name, and
+              submits from there. On phones the fields shrink to 44px, the smallest tap
+              target, so the submit stays in view under the last field with the keyboard up. Errors are Brick, the one
               place a warm tone signals status outside a badge. Submit is never disabled: a submit
               writes what&rsquo;s wrong under each field and focuses the first, leaving the email
               field offers a tap-to-fix &ldquo;Did you mean&nbsp;…?&rdquo; for typo&rsquo;d

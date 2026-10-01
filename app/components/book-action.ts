@@ -30,9 +30,9 @@ export type BookFormState =
       values: Record<Field, string>;
     };
 
-export type Field = "name" | "email" | "business" | "message";
+export type Field = "name" | "email" | "business";
 
-const LIMITS: Record<Field, number> = { name: 120, email: 200, business: 160, message: 4000 };
+const LIMITS: Record<Field, number> = { name: 120, email: 200, business: 160 };
 
 const INBOX = "hello@mihopartners.com";
 const TO = (process.env.CONTACT_TO || INBOX)
@@ -130,16 +130,13 @@ async function domainTakesMail(domain: string): Promise<boolean> {
   return Promise.race([lookup(), timeout]);
 }
 
-// Name and email are required; business name and message are optional.
+// Name and email are required; business name is optional.
 function summary(v: Record<Field, string>, source: string) {
   return [
     `Name: ${v.name}`,
     `Email: ${v.email}`,
     `Business name: ${v.business || "(left blank)"}`,
     ...(source ? [`Came from: ${source}`] : []),
-    "",
-    "What eats their time:",
-    v.message || "(left blank)",
   ].join("\n");
 }
 

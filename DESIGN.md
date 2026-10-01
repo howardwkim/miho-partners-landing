@@ -464,8 +464,12 @@ article's prose styling rather than defining its own.
   the submit stays reachable. The close button is the last tab stop. Focus rings show for
   keyboard focus only (`:focus-visible`), never after a click or tap. The thank-you
   replaces the form inside the modal.
-- **Fields:** Email, Name, Business name (optional), What eats your time (optional), in that
-  order; one Name field, not first and last. Rule Gray hairline, 6px radius, border goes Signal Green on focus. Labels are
+- **Fields:** Email, Name, Business name (optional), in that order; one Name field, not
+  first and last. Return on Email or Name moves to the next field (`enterkeyhint="next"`);
+  Return on Business name submits (`enterkeyhint="go"`). Autofill: `email`, `name`,
+  `organization`. On phones the fields are compact: 44px tall (the minimum tap target),
+  10px apart, so the submit sits in view under Business name even with the keyboard up. The
+  submit is never pinned to the bottom. Rule Gray hairline, 6px radius, border goes Signal Green on focus. Labels are
   black 14px semibold. Required fields carry no marker; optional ones end in a Quiet Gray
   "(optional)". Inputs are 16px so iOS doesn't zoom on focus. Errors are Brick text and a
   Brick field border.
