@@ -459,8 +459,13 @@ article's prose styling rather than defining its own.
   the close button, so the whole form and its submit fit one phone screen (checked down to
   375×667) with the keyboard closed. Native `<dialog>`: focus
   stays inside, Esc / close button / backdrop click close it, page scroll locks, focus
-  returns to the opener. The thank-you replaces the form inside the modal.
-- **Fields:** Rule Gray hairline, 6px radius, border goes Signal Green on focus. Labels are
+  returns to the opener. Focus opens on the Email field (on phones this raises the
+  keyboard at once); the sheet then shrinks to the area above the keyboard and scrolls, so
+  the submit stays reachable. The close button is the last tab stop. Focus rings show for
+  keyboard focus only (`:focus-visible`), never after a click or tap. The thank-you
+  replaces the form inside the modal.
+- **Fields:** Email, Name, Business name (optional), What eats your time (optional), in that
+  order; one Name field, not first and last. Rule Gray hairline, 6px radius, border goes Signal Green on focus. Labels are
   black 14px semibold. Required fields carry no marker; optional ones end in a Quiet Gray
   "(optional)". Inputs are 16px so iOS doesn't zoom on focus. Errors are Brick text and a
   Brick field border.

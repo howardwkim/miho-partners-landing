@@ -9,8 +9,9 @@ import { submitBookForm, type BookFormState, type Field } from "./book-action";
 /* ---------------------------------------------------------------------------
    The form inside the booking modal. Warm Paper ground: Rule Gray hairline
    fields that go Signal Green on focus, black labels, and the one primary
-   button as the submit, keeping the site's single CTA label. Name and email
-   are required; the other two say "(optional)" in their label.
+   button as the submit, keeping the site's single CTA label. Email comes
+   first, then Name; both are required. The other two say "(optional)" in
+   their label.
 
    Validation stays out of the way until submit. The button is never disabled
    for a bad field: a submit checks the fields with the browser's own rules
@@ -97,7 +98,6 @@ export function BookForm({ source }: { source?: BookSource }) {
       }}
     >
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5">
-        <Input name="name" label="Name" required autoComplete="name" values={values} errors={errors} />
         <Input
           name="email"
           label="Email"
@@ -122,6 +122,7 @@ export function BookForm({ source }: { source?: BookSource }) {
             </button>
           )}
         </Input>
+        <Input name="name" label="Name" required autoComplete="name" values={values} errors={errors} />
       </div>
       <div className="mt-3 sm:mt-5">
         <Input
@@ -180,7 +181,7 @@ export function BookForm({ source }: { source?: BookSource }) {
 const MAX_LENGTH: Record<Field, number> = { name: 120, email: 200, business: 160, message: 4000 };
 
 function focusFirst(form: HTMLFormElement | null, errors: Errors) {
-  const first = (["name", "email", "business", "message"] as Field[]).find((f) => errors[f]);
+  const first = (["email", "name", "business", "message"] as Field[]).find((f) => errors[f]);
   const el = first && form?.elements.namedItem(first);
   if (el instanceof HTMLElement) el.focus();
 }
