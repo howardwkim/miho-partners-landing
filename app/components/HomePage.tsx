@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { BookButton } from "./BookButton";
+import { BookForm } from "./BookForm";
 import { BlogSampler } from "./BlogSampler";
 import { SiteFooter } from "./SiteFooter";
 import { SiteNav } from "./SiteNav";
@@ -361,9 +362,10 @@ export function HomePage({ proportions = "current" }: { proportions?: Proportion
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section id="book" className={`bg-ink text-ink-foreground ${p.ctaPad}`}>
-        <div className="mx-auto flex w-full max-w-5xl flex-col items-start justify-between gap-8 px-6 sm:flex-row sm:items-center sm:px-10">
+      {/* Final CTA. Every "Book your audit" button on the site lands here, so this band has
+          to hold the form itself. A button here would point back at its own section. */}
+      <section id="book" className={`scroll-mt-6 bg-ink text-ink-foreground ${p.ctaPad}`}>
+        <div className="mx-auto grid w-full max-w-5xl grid-cols-1 items-start gap-10 px-6 sm:px-10 md:grid-cols-2 md:gap-16">
           <div>
             <h2 className="text-3xl font-light tracking-tight sm:text-4xl">
               Start with the <span className="font-accent italic">Time Saver Audit</span>.
@@ -372,7 +374,7 @@ export function HomePage({ proportions = "current" }: { proportions?: Proportion
               $399, one 45-minute call, five hours a week guaranteed or your money back.
             </p>
           </div>
-          <BookButton />
+          <BookForm />
         </div>
       </section>
 

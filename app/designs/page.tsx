@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BookButton } from "../components/BookButton";
+import { BookForm } from "../components/BookForm";
+import { CalBookButton } from "../components/CalBookButton";
 import { PostRow } from "../components/PostRow";
 import { Takeaway } from "../components/Takeaway";
 import { AUTHORS } from "@/lib/blog/authors";
@@ -192,6 +194,40 @@ export default function Designs() {
             <p className="mt-2 text-xs text-muted">
               Colour is the hover signal &mdash; never underline-only or opacity-only
             </p>
+          </div>
+        </div>
+      </Section>
+
+      <Section id="booking" title="Booking">
+        <p className="mb-10 max-w-2xl text-muted">
+          Where &ldquo;Book your audit&rdquo; ends up. Every primary button links to{" "}
+          <code className="text-xs">/#book</code>, so the final band on the homepage holds the
+          form itself rather than another button.
+        </p>
+
+        <div className="space-y-12">
+          <div>
+            <div className="mb-3 text-lg font-bold">Booking form</div>
+            <p className="mb-5 max-w-2xl text-sm text-muted">
+              Lives on the Forest Ink band. Warm Paper fields with white labels, 6px radius like
+              anything else you click, and the primary button as the submit, label unchanged. A
+              submission emails the shared inbox with reply-to set to the person, and posts to
+              Slack when a webhook is configured. A hidden honeypot field catches bots. This one
+              is live: submitting it sends a real request.
+            </p>
+            <div className="rounded-3xl bg-ink p-8 text-ink-foreground">
+              <BookForm />
+            </div>
+          </div>
+
+          <div>
+            <div className="mb-3 text-lg font-bold">Scheduler button</div>
+            <p className="mb-5 max-w-2xl text-sm text-muted">
+              The same primary button, opening a Cal.com booking popup instead of linking to the
+              form. Only on the unlinked <code className="text-xs">/test/booking</code> page until
+              MiHo has a Cal.com account; it points at Cal.com&rsquo;s public demo calendar.
+            </p>
+            <CalBookButton />
           </div>
         </div>
       </Section>
