@@ -192,7 +192,7 @@ documented.
 The warm family is support, never structure. On Modern Life these tones are
 illustration-only; using them as UI is a deliberate departure, rationed hard.
 
-- **Brick** (`#bb4038`): Draft-badge text. Sparing emphasis only.
+- **Brick** (`#bb4038`): Draft-badge text and form validation errors. Sparing emphasis only.
 - **Tan** (`#f2e0ca`): The outer ring behind the founder portrait, at 60% opacity, and
   the draft-badge ground. Warmth behind a photograph.
 
@@ -449,6 +449,36 @@ The one bespoke component in the article template, required in every article. A 
 Sage panel at 24px radius with 28–36px padding, opening with an italic Instrument Serif
 title at 24–30px in Forest Ink, holding two or three concrete actions. It inherits the
 article's prose styling rather than defining its own.
+
+### Booking modal and form
+
+- **Trigger:** Every primary button opens the booking modal over the current page. Its
+  href still points at `/#book` (the final CTA band) as the no-JavaScript fallback.
+- **Modal:** A Warm Paper card, 24px radius, on a Forest Ink scrim at 70%. No shadow; the
+  scrim separates it. Below 640px it is a full-screen sheet whose title shares a row with
+  the close button, so the whole form and its submit fit one phone screen (checked down to
+  375×667) with the keyboard closed. Native `<dialog>`: focus
+  stays inside, Esc / close button / backdrop click close it, page scroll locks, focus
+  returns to the opener. Focus opens on the title, not a field, so no phone keyboard
+  appears until the visitor taps one. Nothing tracks the keyboard: the submit sits in
+  normal flow under the last field and the sheet scrolls like a page. The close button is the last tab stop. Focus rings show for
+  keyboard focus only (`:focus-visible`), never after a click or tap. The thank-you
+  replaces the form inside the modal.
+- **Fields:** Name, Email, Business name (optional), in that order; one Name field, not
+  first and last. Return on Name or Email moves to the next field (`enterkeyhint="next"`);
+  Return on Business name submits (`enterkeyhint="go"`). Autofill: `name`, `email`,
+  `organization`. On phones the fields are compact: 44px tall (the minimum tap target),
+  10px apart, so the submit sits in view under Business name even with the keyboard up. The
+  submit is never pinned to the bottom. Rule Gray hairline, 6px radius, border goes Signal Green on focus. Labels are
+  black 14px semibold. Required fields carry no marker; optional ones end in a Quiet Gray
+  "(optional)". Inputs are 16px so iOS doesn't zoom on focus. Errors are Brick text and a
+  Brick field border.
+- **Validation:** The submit is never disabled for a bad field. A submit runs the browser's
+  own checks (required, `type="email"`), writes what's wrong under each field, and focuses
+  the first. Leaving the email field offers a tap-to-fix "Did you mean …?" link for common
+  domain typos; it never blocks. The server trims, lowercases the email's domain, and
+  rejects a domain with no MX or A record. A DNS timeout lets the request through.
+- **Submit:** The primary button, label "Book your audit".
 
 ### Signature devices
 

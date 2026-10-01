@@ -361,7 +361,7 @@ export function HomePage({ proportions = "current" }: { proportions?: Proportion
         </div>
       </section>
 
-      {/* Final CTA */}
+      {/* Final CTA. Like every "Book your audit" button, this one opens the booking modal. */}
       <section id="book" className={`bg-ink text-ink-foreground ${p.ctaPad}`}>
         <div className="mx-auto flex w-full max-w-5xl flex-col items-start justify-between gap-8 px-6 sm:flex-row sm:items-center sm:px-10">
           <div>

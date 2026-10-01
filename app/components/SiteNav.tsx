@@ -96,7 +96,7 @@ export function SiteNav() {
               {l.label}
             </Link>
           ))}
-          <BookButton className="mt-6 w-full py-4 text-base" />
+          <BookButton className="mt-6 w-full py-4 text-base" onClick={() => setOpen(false)} />
         </div>
       )}
     </header>

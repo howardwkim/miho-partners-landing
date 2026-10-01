@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Instrument_Serif } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { BookModalProvider } from "./components/BookModal";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -30,7 +31,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${manrope.variable} ${instrumentSerif.variable} antialiased`}>
-      <body>{children}</body>
+      <body>
+        <BookModalProvider>{children}</BookModalProvider>
+      </body>
       <GoogleAnalytics gaId="G-T25BZM34Z6" />
     </html>
   );
