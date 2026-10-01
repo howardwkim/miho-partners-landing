@@ -227,7 +227,10 @@ export default function Designs() {
               radius like anything else you click, and the primary button as the submit, label
               unchanged. Name and email are required; business name and &ldquo;What eats your
               time?&rdquo; carry an &ldquo;(optional)&rdquo; label. Errors are Brick, the one
-              place a warm tone signals status outside a badge. A submission emails the shared
+              place a warm tone signals status outside a badge. Submit is never disabled: a submit
+              writes what&rsquo;s wrong under each field and focuses the first, leaving the email
+              field offers a tap-to-fix &ldquo;Did you mean&nbsp;…?&rdquo; for typo&rsquo;d
+              domains, and the server rejects a domain that can&rsquo;t take mail. A submission emails the shared
               inbox with reply-to set to the person, and posts to Slack when a webhook is
               configured. A hidden honeypot field catches bots. This one is live: submitting it
               sends a real request.

@@ -455,12 +455,20 @@ article's prose styling rather than defining its own.
 - **Trigger:** Every primary button opens the booking modal over the current page. Its
   href still points at `/#book` (the final CTA band) as the no-JavaScript fallback.
 - **Modal:** A Warm Paper card, 24px radius, on a Forest Ink scrim at 70%. No shadow; the
-  scrim separates it. Below 640px it is a full-screen sheet. Native `<dialog>`: focus
+  scrim separates it. Below 640px it is a full-screen sheet whose title shares a row with
+  the close button, so the whole form and its submit fit one phone screen (checked down to
+  375×667) with the keyboard closed. Native `<dialog>`: focus
   stays inside, Esc / close button / backdrop click close it, page scroll locks, focus
   returns to the opener. The thank-you replaces the form inside the modal.
 - **Fields:** Rule Gray hairline, 6px radius, border goes Signal Green on focus. Labels are
   black 14px semibold. Required fields carry no marker; optional ones end in a Quiet Gray
-  "(optional)". Errors are Brick text and a Brick field border.
+  "(optional)". Inputs are 16px so iOS doesn't zoom on focus. Errors are Brick text and a
+  Brick field border.
+- **Validation:** The submit is never disabled for a bad field. A submit runs the browser's
+  own checks (required, `type="email"`), writes what's wrong under each field, and focuses
+  the first. Leaving the email field offers a tap-to-fix "Did you mean …?" link for common
+  domain typos; it never blocks. The server trims, lowercases the email's domain, and
+  rejects a domain with no MX or A record. A DNS timeout lets the request through.
 - **Submit:** The primary button, label "Book your audit".
 
 ### Signature devices

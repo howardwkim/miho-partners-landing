@@ -1,5 +1,7 @@
 "use server";
 
+import { Resolver } from "node:dns/promises";
+
 /* ---------------------------------------------------------------------------
    The "Book your audit" form posts here. One submission fans out to two places:
    an email to the shared inbox (Resend, reply-to set to the submitter so hitting
@@ -31,7 +33,6 @@ export type BookFormState =
 export type Field = "name" | "email" | "business" | "message";
 
 const LIMITS: Record<Field, number> = { name: 120, email: 200, business: 160, message: 4000 };
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const INBOX = "hello@mihopartners.com";
 const TO = (process.env.CONTACT_TO || INBOX)
@@ -57,8 +58,16 @@ export async function submitBookForm(
     values[key] = v;
     if (v.length > LIMITS[key]) fields[key] = "That's longer than we can take here.";
   }
+  values.email = cleanEmail(values.email);
   if (!values.name) fields.name = "We need a name to write back to.";
-  if (!EMAIL_RE.test(values.email)) fields.email = "That email doesn't look right.";
+  // The browser's type="email" check runs before submit; this is the backstop
+  // for no-JS posts, then a DNS check that the domain can take mail at all.
+  const domain = values.email.slice(values.email.lastIndexOf("@") + 1);
+  if (!values.email) fields.email = "We need an email to write back to.";
+  else if (!values.email.includes("@") || !domain.includes("."))
+    fields.email = "That email is missing a part. It should look like name@business.com.";
+  else if (!fields.email && !(await domainTakesMail(domain)))
+    fields.email = "That email domain doesn't seem to accept mail.";
   if (Object.keys(fields).length) {
     return { status: "error", message: "A couple of things to fix first.", fields, values };
   }
@@ -85,6 +94,40 @@ export async function submitBookForm(
     };
   }
   return { status: "sent", name: values.name, email: values.email };
+}
+
+/** Trims and lowercases the domain. The part before the @ is left as typed. */
+function cleanEmail(raw: string) {
+  const email = raw.replace(/\s+/g, "");
+  const at = email.lastIndexOf("@");
+  return at < 0 ? email : email.slice(0, at + 1) + email.slice(at + 1).toLowerCase();
+}
+
+/**
+ * False only when DNS says the domain has no mail server (MX) and no address (A)
+ * to fall back on. A timeout or any other DNS trouble counts as true: a lead
+ * with a possibly-bad address beats a lost lead.
+ */
+async function domainTakesMail(domain: string): Promise<boolean> {
+  const dns = new Resolver({ timeout: 2000, tries: 2 });
+  const missing = (e: unknown) =>
+    ["ENOTFOUND", "ENODATA"].includes((e as NodeJS.ErrnoException).code ?? "");
+  const lookup = async () => {
+    try {
+      const mx = await dns.resolveMx(domain);
+      // A "null MX" (RFC 7505, a single "." host) says the domain takes no mail.
+      return mx.some((r) => r.exchange && r.exchange !== ".");
+    } catch (e) {
+      if (!missing(e)) return true;
+    }
+    try {
+      return (await dns.resolve4(domain)).length > 0;
+    } catch (e) {
+      return !missing(e);
+    }
+  };
+  const timeout = new Promise<boolean>((resolve) => setTimeout(() => resolve(true), 5000));
+  return Promise.race([lookup(), timeout]);
 }
 
 // Name and email are required; business name and message are optional.

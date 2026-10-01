@@ -76,23 +76,26 @@ export function BookModalProvider({ children }: { children: React.ReactNode }) {
         className="m-0 h-full max-h-none w-full max-w-none overflow-y-auto bg-background p-0 text-foreground backdrop:bg-ink/70 sm:m-auto sm:h-fit sm:max-h-[calc(100dvh-4rem)] sm:max-w-lg sm:rounded-3xl"
       >
         {open && (
-          <div className="relative min-h-full p-7 pt-16 sm:p-8 sm:pt-8">
-            <button
-              type="button"
-              aria-label="Close"
-              onClick={() => ref.current?.close()}
-              className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-md text-2xl leading-none text-muted transition-colors hover:bg-surface hover:text-foreground"
-            >
-              &times;
-            </button>
-            <h2 id="book-modal-title" className="pr-10 text-3xl font-light tracking-tight">
-              Book your <span className="font-accent italic">audit</span>
-            </h2>
-            <p className="mt-3 text-muted">
+          <div className="min-h-full px-5 pt-[max(1rem,env(safe-area-inset-top))] pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:p-8">
+            {/* Title and close share a row so the form fits one phone screen. */}
+            <div className="flex items-start justify-between gap-3">
+              <h2 id="book-modal-title" className="pt-1 text-3xl font-light tracking-tight">
+                Book your <span className="font-accent italic">audit</span>
+              </h2>
+              <button
+                type="button"
+                aria-label="Close"
+                onClick={() => ref.current?.close()}
+                className="-mr-2 -mt-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-md text-2xl leading-none text-muted transition-colors hover:bg-surface hover:text-foreground"
+              >
+                &times;
+              </button>
+            </div>
+            <p className="mt-1 text-muted sm:mt-3">
               Tell us who you are and we&rsquo;ll write back to find a time for the 45-minute
               call.
             </p>
-            <div className="mt-7">
+            <div className="mt-4 sm:mt-7">
               <BookForm key={session} source={source} />
             </div>
           </div>
