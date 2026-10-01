@@ -6,8 +6,8 @@ import { getCalApi } from "@calcom/embed-react";
 import { BOOK_BUTTON_CLASS } from "./BookButton";
 
 /* ---------------------------------------------------------------------------
-   The primary button, opening a Cal.com booking popup instead of linking to the
-   #book form. Only used on /test/booking for now, to see what a scheduler would
+   The primary button, opening a Cal.com booking popup instead of the booking
+   modal. Only used on /test/booking for now, to see what a scheduler would
    look like before MiHo has a Cal.com account.
 
    CAL_LINK is Cal.com's own public demo page. Swap it for MiHo's

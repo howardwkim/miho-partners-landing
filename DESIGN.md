@@ -192,7 +192,7 @@ documented.
 The warm family is support, never structure. On Modern Life these tones are
 illustration-only; using them as UI is a deliberate departure, rationed hard.
 
-- **Brick** (`#bb4038`): Draft-badge text. Sparing emphasis only.
+- **Brick** (`#bb4038`): Draft-badge text and form validation errors. Sparing emphasis only.
 - **Tan** (`#f2e0ca`): The outer ring behind the founder portrait, at 60% opacity, and
   the draft-badge ground. Warmth behind a photograph.
 
@@ -449,6 +449,19 @@ The one bespoke component in the article template, required in every article. A 
 Sage panel at 24px radius with 28–36px padding, opening with an italic Instrument Serif
 title at 24–30px in Forest Ink, holding two or three concrete actions. It inherits the
 article's prose styling rather than defining its own.
+
+### Booking modal and form
+
+- **Trigger:** Every primary button opens the booking modal over the current page. Its
+  href still points at `/#book` (the final CTA band) as the no-JavaScript fallback.
+- **Modal:** A Warm Paper card, 24px radius, on a Forest Ink scrim at 70%. No shadow; the
+  scrim separates it. Below 640px it is a full-screen sheet. Native `<dialog>`: focus
+  stays inside, Esc / close button / backdrop click close it, page scroll locks, focus
+  returns to the opener. The thank-you replaces the form inside the modal.
+- **Fields:** Rule Gray hairline, 6px radius, border goes Signal Green on focus. Labels are
+  black 14px semibold. Required fields carry no marker; optional ones end in a Quiet Gray
+  "(optional)". Errors are Brick text and a Brick field border.
+- **Submit:** The primary button, label "Book your audit".
 
 ### Signature devices
 

@@ -200,22 +200,39 @@ export default function Designs() {
 
       <Section id="booking" title="Booking">
         <p className="mb-10 max-w-2xl text-muted">
-          Where &ldquo;Book your audit&rdquo; ends up. Every primary button links to{" "}
-          <code className="text-xs">/#book</code>, so the final band on the homepage holds the
-          form itself rather than another button.
+          Where &ldquo;Book your audit&rdquo; ends up. Every primary button opens the booking
+          modal over the page it&rsquo;s on, so the visitor never loses their place. Its href
+          still points at <code className="text-xs">/#book</code>, the final CTA band, for a
+          new-tab click or a browser without JavaScript.
         </p>
 
         <div className="space-y-12">
           <div>
+            <div className="mb-3 text-lg font-bold">Booking modal</div>
+            <p className="mb-5 max-w-2xl text-sm text-muted">
+              A Warm Paper card (24px radius) on a Forest Ink scrim at 70%, no shadow: the scrim
+              does the separating. Below 640px it becomes a full-screen sheet. Built on a native{" "}
+              <code className="text-xs">&lt;dialog&gt;</code>: focus stays inside, Esc, the
+              &times; and a backdrop click all close it, the page behind doesn&rsquo;t scroll,
+              and focus returns to the button that opened it. The thank-you shows inside the
+              modal. Try it:
+            </p>
+            <BookButton />
+          </div>
+
+          <div>
             <div className="mb-3 text-lg font-bold">Booking form</div>
             <p className="mb-5 max-w-2xl text-sm text-muted">
-              Lives on the Forest Ink band. Warm Paper fields with white labels, 6px radius like
-              anything else you click, and the primary button as the submit, label unchanged. A
-              submission emails the shared inbox with reply-to set to the person, and posts to
-              Slack when a webhook is configured. A hidden honeypot field catches bots. This one
-              is live: submitting it sends a real request.
+              What the modal holds. Hairline Rule Gray fields that go Signal Green on focus, 6px
+              radius like anything else you click, and the primary button as the submit, label
+              unchanged. Name and email are required; business name and &ldquo;What eats your
+              time?&rdquo; carry an &ldquo;(optional)&rdquo; label. Errors are Brick, the one
+              place a warm tone signals status outside a badge. A submission emails the shared
+              inbox with reply-to set to the person, and posts to Slack when a webhook is
+              configured. A hidden honeypot field catches bots. This one is live: submitting it
+              sends a real request.
             </p>
-            <div className="rounded-3xl bg-ink p-8 text-ink-foreground">
+            <div className="max-w-lg rounded-3xl bg-background p-8 ring-1 ring-ux-gray-2">
               <BookForm />
             </div>
           </div>
@@ -223,8 +240,8 @@ export default function Designs() {
           <div>
             <div className="mb-3 text-lg font-bold">Scheduler button</div>
             <p className="mb-5 max-w-2xl text-sm text-muted">
-              The same primary button, opening a Cal.com booking popup instead of linking to the
-              form. Only on the unlinked <code className="text-xs">/test/booking</code> page until
+              The same primary button, opening a Cal.com booking popup instead of the booking
+              modal. Only on the unlinked <code className="text-xs">/test/booking</code> page until
               MiHo has a Cal.com account; it points at Cal.com&rsquo;s public demo calendar.
             </p>
             <CalBookButton />

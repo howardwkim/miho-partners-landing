@@ -59,12 +59,19 @@ export async function submitBookForm(
   }
   if (!values.name) fields.name = "We need a name to write back to.";
   if (!EMAIL_RE.test(values.email)) fields.email = "That email doesn't look right.";
-  if (!values.business) fields.business = "Which business is this for?";
   if (Object.keys(fields).length) {
     return { status: "error", message: "A couple of things to fix first.", fields, values };
   }
 
-  const results = await Promise.allSettled([sendEmail(values), postToSlack(values)]);
+  const source = ["utm_source", "utm_medium", "utm_campaign"]
+    .map((k) => String(formData.get(k) ?? "").trim().slice(0, 100))
+    .filter(Boolean)
+    .join(" / ");
+
+  const results = await Promise.allSettled([
+    sendEmail(values, source),
+    postToSlack(values, source),
+  ]);
   const delivered = results.some((r) => r.status === "fulfilled" && r.value === true);
   for (const r of results) {
     if (r.status === "rejected") console.error("book form delivery failed:", r.reason);
@@ -80,11 +87,13 @@ export async function submitBookForm(
   return { status: "sent", name: values.name, email: values.email };
 }
 
-function summary(v: Record<Field, string>) {
+// Name and email are required; business name and message are optional.
+function summary(v: Record<Field, string>, source: string) {
   return [
     `Name: ${v.name}`,
     `Email: ${v.email}`,
-    `Business: ${v.business}`,
+    `Business name: ${v.business || "(left blank)"}`,
+    ...(source ? [`Came from: ${source}`] : []),
     "",
     "What eats their time:",
     v.message || "(left blank)",
@@ -92,7 +101,7 @@ function summary(v: Record<Field, string>) {
 }
 
 /** Resolves true when sent, false when not configured; throws on a failed send. */
-async function sendEmail(v: Record<Field, string>): Promise<boolean> {
+async function sendEmail(v: Record<Field, string>, source: string): Promise<boolean> {
   const key = process.env.RESEND_API_KEY;
   if (!key) {
     console.warn("RESEND_API_KEY is not set; skipping email.");
@@ -105,8 +114,8 @@ async function sendEmail(v: Record<Field, string>): Promise<boolean> {
       from: FROM,
       to: TO,
       reply_to: v.email,
-      subject: `Audit request: ${v.name}, ${v.business}`,
-      text: summary(v),
+      subject: `Audit request: ${v.name}${v.business ? `, ${v.business}` : ""}`,
+      text: summary(v, source),
     }),
   });
   if (!res.ok) throw new Error(`Resend ${res.status}: ${await res.text()}`);
@@ -114,7 +123,7 @@ async function sendEmail(v: Record<Field, string>): Promise<boolean> {
 }
 
 /** Resolves true when posted, false when not configured; throws on a failed post. */
-async function postToSlack(v: Record<Field, string>): Promise<boolean> {
+async function postToSlack(v: Record<Field, string>, source: string): Promise<boolean> {
   const url = process.env.SLACK_WEBHOOK_URL;
   if (!url) return false;
   // Slack treats &, < and > as control characters in message text.
@@ -122,7 +131,7 @@ async function postToSlack(v: Record<Field, string>): Promise<boolean> {
   const res = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ text: `*New audit request*\n${esc(summary(v))}` }),
+    body: JSON.stringify({ text: `*New audit request*\n${esc(summary(v, source))}` }),
   });
   if (!res.ok) throw new Error(`Slack ${res.status}: ${await res.text()}`);
   return true;
