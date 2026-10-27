@@ -45,7 +45,17 @@ function clientError(el: HTMLInputElement): string | undefined {
   return undefined;
 }
 
-export function BookForm({ source }: { source?: BookSource }) {
+export function BookForm({
+  source,
+  submitLabel = "Book your audit",
+  withPhone = false,
+}: {
+  source?: BookSource;
+  /** The /moretime page asks for a free call, so it says so on the button. */
+  submitLabel?: string;
+  /** Adds an optional phone field (the /moretime page). */
+  withPhone?: boolean;
+}) {
   const [state, action, pending] = useActionState(submitBookForm, INITIAL);
   const formRef = useRef<HTMLFormElement>(null);
   // Set by a submit the browser rejected; cleared when one gets through to the server.
@@ -135,6 +145,19 @@ export function BookForm({ source }: { source?: BookSource }) {
           )}
         </Input>
       </div>
+      {withPhone && (
+        <div className="mt-2.5 sm:mt-5">
+          <Input
+            name="phone"
+            label={<>Phone{OPTIONAL}</>}
+            type="tel"
+            autoComplete="tel"
+            enterKeyHint="next"
+            values={values}
+            errors={errors}
+          />
+        </div>
+      )}
       <div className="mt-2.5 sm:mt-5">
         <Input
           name="business"
@@ -173,15 +196,15 @@ export function BookForm({ source }: { source?: BookSource }) {
         disabled={pending}
         className={`${BOOK_BUTTON_CLASS} mt-4 sm:mt-6 disabled:bg-ux-gray-3`}
       >
-        {pending ? "Sending…" : "Book your audit"}
+        {pending ? "Sending…" : submitLabel}
       </button>
     </form>
   );
 }
 
-const MAX_LENGTH: Record<Field, number> = { name: 120, email: 200, business: 160 };
+const MAX_LENGTH: Record<Field, number> = { name: 120, email: 200, phone: 40, business: 160 };
 
-const ORDER: Field[] = ["name", "email", "business"];
+const ORDER: Field[] = ["name", "email", "phone", "business"];
 
 function focusFirst(form: HTMLFormElement | null, errors: Errors) {
   const first = ORDER.find((f) => errors[f]);
@@ -231,7 +254,11 @@ function Input({
             enterKeyHint === "next"
               ? (e) => {
                   if (e.key !== "Enter" || e.nativeEvent.isComposing) return;
-                  const next = e.currentTarget.form?.elements.namedItem(ORDER[ORDER.indexOf(name) + 1]);
+                  // The next field that's actually on this form (phone only shows on /moretime).
+                  const form = e.currentTarget.form;
+                  const next = ORDER.slice(ORDER.indexOf(name) + 1)
+                    .map((f) => form?.elements.namedItem(f))
+                    .find((el) => el instanceof HTMLElement);
                   if (next instanceof HTMLElement) {
                     e.preventDefault();
                     next.focus();

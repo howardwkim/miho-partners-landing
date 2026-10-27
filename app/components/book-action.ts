@@ -30,9 +30,10 @@ export type BookFormState =
       values: Record<Field, string>;
     };
 
-export type Field = "name" | "email" | "business";
+export type Field = "name" | "email" | "phone" | "business";
 
-const LIMITS: Record<Field, number> = { name: 120, email: 200, business: 160 };
+// Phone only appears on the /moretime form; elsewhere it simply arrives empty.
+const LIMITS: Record<Field, number> = { name: 120, email: 200, phone: 40, business: 160 };
 
 const INBOX = "hello@mihopartners.com";
 const TO = (process.env.CONTACT_TO || INBOX)
@@ -130,14 +131,20 @@ async function domainTakesMail(domain: string): Promise<boolean> {
   return Promise.race([lookup(), timeout]);
 }
 
-// Name and email are required; business name is optional.
+// Name and email are required; phone and business name are optional.
 function summary(v: Record<Field, string>, source: string) {
   return [
     `Name: ${v.name}`,
     `Email: ${v.email}`,
+    ...(v.phone ? [`Phone: ${v.phone}`] : []),
     `Business name: ${v.business || "(left blank)"}`,
     ...(source ? [`Came from: ${source}`] : []),
   ].join("\n");
+}
+
+/** The /moretime page asks for the free 20 minute call, not the paid audit. */
+function requestKind(source: string) {
+  return source.startsWith("moretime") ? "Free 20 min call request" : "Audit request";
 }
 
 /** Resolves true when sent, false when not configured; throws on a failed send. */
@@ -154,7 +161,7 @@ async function sendEmail(v: Record<Field, string>, source: string): Promise<bool
       from: FROM,
       to: TO,
       reply_to: v.email,
-      subject: `Audit request: ${v.name}${v.business ? `, ${v.business}` : ""}`,
+      subject: `${requestKind(source)}: ${v.name}${v.business ? `, ${v.business}` : ""}`,
       text: summary(v, source),
     }),
   });

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { BOOK_BUTTON_CLASS } from "../components/BookButton";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteNav } from "../components/SiteNav";
+import { MoreTimeForm } from "./MoreTimeForm";
 
 /* ---------------------------------------------------------------------------
    Where the one page competitor sheet points. Owners land here from the printed
@@ -325,6 +326,22 @@ export default function MoreTimePage() {
               </svg>
               <span className="relative">{PHONE_DISPLAY}</span>
             </a>
+          </div>
+        </section>
+
+        {/* For the owner who won't text a stranger but will leave a name */}
+        <section className="mx-auto w-full max-w-4xl px-6 pb-16 sm:px-10">
+          <div className="rounded-2xl bg-surface px-6 py-8 sm:px-10 sm:py-10">
+            <h2 className={H2} style={{ color: CARD_BLUE }}>
+              Rather we reach out to you?
+            </h2>
+            <p className="mt-3 max-w-xl leading-relaxed text-muted">
+              Leave your name and email. Mike will write back to find a time for the 20 minute
+              call.
+            </p>
+            <div className="mt-6 max-w-2xl">
+              <MoreTimeForm />
+            </div>
           </div>
         </section>
 
