@@ -153,8 +153,10 @@ export default function MoreTimePage() {
               Get your evenings back.
             </h1>
             <p className="mt-6 max-w-md text-lg leading-relaxed text-white/90">
-              If Mike dropped off a one page report, this page explains what it means and what you
-              can do next. No report yet? Text us and we&rsquo;ll make you one for free.
+              You read all the way to the bottom of your report. Most people don&rsquo;t, so
+              something in it must have caught your eye. We didn&rsquo;t pick your business at
+              random. We picked a few local companies where we think simple automations could give
+              the owner real time back, and yours was one of them.
             </p>
             <div className="mt-8 flex max-w-lg flex-col items-start gap-3">
               <a href={SMS_HREF} className={BOOK_BUTTON_CLASS}>
@@ -165,11 +167,15 @@ export default function MoreTimePage() {
           </div>
         </header>
 
-        {/* The postcard's opening, word for word */}
+        {/* Speaks to them as an owner first, then the postcard's opening list. */}
         <section className="mx-auto w-full max-w-4xl px-6 pt-16 sm:px-10 sm:pt-20">
           <h2 className={H2} style={{ color: CARD_BLUE }}>
-            How much of your day starts with:
+            Business owners, how much of your day starts like this?
           </h2>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
+            You started your business to do the work you&rsquo;re good at. But every owner we talk
+            to says the same thing: the small stuff around the work keeps landing on them.
+          </p>
           <ul className="mt-6 space-y-2 text-lg leading-relaxed">
             {DAY_STARTS.map((l) => (
               <li key={l.b}>
@@ -224,8 +230,9 @@ export default function MoreTimePage() {
           </div>
         </section>
 
-        {/* Fixes */}
-        <section className="mx-auto w-full max-w-4xl px-6 py-16 sm:px-10 sm:py-20">
+        {/* Fixes, with the postcard clock as a faint watermark behind the list */}
+        <section className="relative isolate mx-auto w-full max-w-4xl overflow-hidden px-6 py-16 sm:overflow-visible sm:px-10 sm:py-20">
+          <Clock className="pointer-events-none absolute -right-16 top-1/2 -z-10 h-80 w-80 -translate-y-1/2 opacity-[0.08] sm:-right-24 sm:h-[28rem] sm:w-[28rem]" />
           <h2 className={H2} style={{ color: CARD_BLUE }}>
             The simple fixes
           </h2>
