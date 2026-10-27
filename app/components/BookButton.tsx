@@ -4,9 +4,10 @@ import Link from "next/link";
 
 import { useBookModal } from "./BookModal";
 
+import { BOOK_BUTTON_CLASS } from "./button-class";
+
 /** The primary button's look, shared with the form's submit and the Cal.com test button. */
-export const BOOK_BUTTON_CLASS =
-  "inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-md bg-accent px-[14px] py-[12px] text-[15px] font-semibold text-foreground transition-colors hover:bg-accent-hover";
+export { BOOK_BUTTON_CLASS };
 
 type BookButtonProps = {
   className?: string;

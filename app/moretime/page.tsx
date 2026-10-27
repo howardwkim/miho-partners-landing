@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Barlow_Condensed } from "next/font/google";
 import Image from "next/image";
 
-import { BOOK_BUTTON_CLASS } from "../components/BookButton";
+import { BOOK_BUTTON_CLASS } from "../components/button-class";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteNav } from "../components/SiteNav";
 import { MoreTimeForm } from "./MoreTimeForm";
@@ -37,6 +37,9 @@ const SMS_HREF = "sms:+12063548751?&body=MORE%20TIME";
 const TEL_HREF = "tel:+12063548751";
 const EMAIL = "mike@mihopartners.com";
 const MAIL_HREF = `mailto:${EMAIL}?subject=More%20time`;
+/** Mike's Google Calendar booking page (mike@michaelgrabham.com): 20 min phone call, weekdays 9 to 5 Pacific. */
+const CALENDAR_HREF =
+  "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2s4cD8fzJpqo9NSeMf28ZXNZGXqlT0Ory8N-kGxYhGVwS8G-r2IVG4W4FuG7yDMlXYNlOyYLva";
 
 const DAY_STARTS = [
   { b: "A question", r: "you’ve answered before." },
@@ -333,7 +336,22 @@ export default function MoreTimePage() {
         <section className="mx-auto w-full max-w-4xl px-6 pb-16 sm:px-10">
           <div className="rounded-2xl bg-surface px-6 py-8 sm:px-10 sm:py-10">
             <h2 className={H2} style={{ color: CARD_BLUE }}>
-              Rather we reach out to you?
+              Rather book a time on Mike&rsquo;s calendar?
+            </h2>
+            <p className="mt-3 max-w-xl leading-relaxed text-muted">
+              Pick any open 20 minutes. Mike will call you at the number you give.
+            </p>
+            <a
+              href={CALENDAR_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${BOOK_BUTTON_CLASS} mt-6`}
+            >
+              Pick a time
+            </a>
+
+            <h2 className={`${H2} mt-12 border-t border-deep/15 pt-10`} style={{ color: CARD_BLUE }}>
+              Or have us reach out to you
             </h2>
             <p className="mt-3 max-w-xl leading-relaxed text-muted">
               Leave your name and email. Mike will write back to find a time for the 20 minute
