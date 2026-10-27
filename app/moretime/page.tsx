@@ -94,6 +94,9 @@ const BUILT = [
   },
 ];
 
+/** Our names in "Who we are" link to our LinkedIn profiles. */
+const NAME_LINK = "font-semibold text-link underline underline-offset-2 transition-colors hover:text-deep";
+
 /** Section titles: the postcard's italic serif, in the postcard blue, and nothing else. */
 const H2 = "font-accent text-3xl italic sm:text-4xl";
 
@@ -369,7 +372,15 @@ export default function MoreTimePage() {
             Who we are
           </h2>
           <p className="mt-4 max-w-2xl leading-relaxed text-muted">
-            MiHo Partners is Mike Grabham and Howard Kim. Mike lives in Walla Walla, has started six
+            MiHo Partners is{" "}
+            <a href="https://www.linkedin.com/in/mikegrabham/" target="_blank" rel="noopener noreferrer" className={NAME_LINK}>
+              Mike Grabham
+            </a>{" "}
+            and{" "}
+            <a href="https://www.linkedin.com/in/howardwaynekim/" target="_blank" rel="noopener noreferrer" className={NAME_LINK}>
+              Howard Kim
+            </a>
+            . Mike lives in Walla Walla, has started six
             companies and sold two, and has an MBA from Seattle University. Howard builds the tools:
             he has a master&rsquo;s in computer science from Georgia Tech.
           </p>
