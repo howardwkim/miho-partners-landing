@@ -156,8 +156,8 @@ export default function MoreTimePage() {
               You read to the bottom of your report. Something must have caught your eye.
             </p>
             <p className="mt-4 max-w-md text-lg leading-relaxed text-white/90">
-              We didn&rsquo;t pick you at random. We think simple automations could give you real
-              time back.
+              We didn&rsquo;t pick you at random. We picked a few local companies where we think
+              simple automations could give the owner real time back, and yours was one of them.
             </p>
             <div className="mt-8 flex max-w-lg flex-col items-start gap-3">
               <a href={SMS_HREF} className={BOOK_BUTTON_CLASS}>
