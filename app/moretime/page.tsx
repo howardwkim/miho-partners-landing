@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Barlow_Condensed } from "next/font/google";
+import Image from "next/image";
 
 import { BOOK_BUTTON_CLASS } from "../components/BookButton";
 import { SiteFooter } from "../components/SiteFooter";
@@ -6,11 +8,17 @@ import { SiteNav } from "../components/SiteNav";
 
 /* ---------------------------------------------------------------------------
    Where the one page competitor sheet points. Owners land here from the printed
-   sheet, the postcard, and the follow-up email (each with ?ref=<lead id>, which
-   GA4 records with the page view). Written at a 6th grade level on purpose, and
-   no price anywhere: the only ask is the free 20 minute call, the same ask the
-   postcard and the letter make. Not in the sitemap or the nav.
+   sheet, the 6x9 postcard, and the follow-up email (each with ?ref=<lead id>,
+   which GA4 records with the page view). Written at a 6th grade level on purpose.
+   Not in the sitemap or the nav.
+
+   It borrows the postcard's look so the two read as one piece: the postcard
+   blue and green, the clock, the "6 minutes x 6 times a day = 3 hours" band and
+   the blue "Let's get something off your plate" bar with the circled number.
+   One font per headline, always (Mike's rule): no serif/sans mixes in a title.
    --------------------------------------------------------------------------- */
+
+const condensed = Barlow_Condensed({ subsets: ["latin"], weight: ["600", "700", "800"] });
 
 export const metadata: Metadata = {
   title: "Your one page report — MiHo Partners",
@@ -19,9 +27,22 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-const PHONE_DISPLAY = "206-354-8751";
+/* Sampled from the printed postcard so the page and the card match. */
+const CARD_BLUE = "#3b6cb7";
+const CARD_GREEN = "#2f8f3f";
+
+const PHONE_DISPLAY = "(206) 354-8751";
 const SMS_HREF = "sms:+12063548751?&body=MORE%20TIME";
 const TEL_HREF = "tel:+12063548751";
+const EMAIL = "mike@mihopartners.com";
+const MAIL_HREF = `mailto:${EMAIL}?subject=More%20time`;
+
+const DAY_STARTS = [
+  { b: "A question", r: "you’ve answered before." },
+  { b: "A reminder", r: "that won’t happen unless you send it." },
+  { b: "Something you handed off", r: "… that landed right back on your desk." },
+  { b: "You handle it because", r: "it’s faster to do it yourself. But you have to do it again tomorrow." },
+];
 
 const CHECKS = [
   {
@@ -69,19 +90,43 @@ const BUILT = [
   },
 ];
 
-function TextMike({ className = "" }: { className?: string }) {
+/** Section titles: the postcard's italic serif, in the postcard blue, and nothing else. */
+const H2 = "font-accent text-3xl italic sm:text-4xl";
+
+/** The postcard's clock: blue face, a blue arrow over the top and a green one underneath. */
+function Clock({ className = "" }: { className?: string }) {
   return (
-    <div className={`flex flex-wrap items-center gap-5 ${className}`}>
-      <a href={SMS_HREF} className={BOOK_BUTTON_CLASS}>
-        Text &ldquo;MORE TIME&rdquo;
+    <svg viewBox="0 0 120 120" className={className} aria-hidden="true">
+      <path d="M22 38 A46 46 0 0 1 96 30" fill="none" stroke={CARD_BLUE} strokeWidth="6" strokeLinecap="round" />
+      <path d="M90 20 L100 32 L86 36" fill="none" stroke={CARD_BLUE} strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M98 82 A46 46 0 0 1 24 90" fill="none" stroke={CARD_GREEN} strokeWidth="6" strokeLinecap="round" />
+      <path d="M30 100 L20 88 L34 84" fill="none" stroke={CARD_GREEN} strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="60" cy="60" r="32" fill="#f3f6ef" stroke={CARD_BLUE} strokeWidth="6" />
+      {[0, 90, 180, 270].map((a) => (
+        <line key={a} x1="60" y1="33" x2="60" y2="38" stroke={CARD_BLUE} strokeWidth="4" strokeLinecap="round" transform={`rotate(${a} 60 60)`} />
+      ))}
+      <line x1="60" y1="60" x2="60" y2="42" stroke={CARD_BLUE} strokeWidth="5" strokeLinecap="round" />
+      <line x1="60" y1="60" x2="72" y2="70" stroke={CARD_BLUE} strokeWidth="5" strokeLinecap="round" />
+      <circle cx="60" cy="60" r="4" fill={CARD_BLUE} />
+    </svg>
+  );
+}
+
+function ContactLinks({ light = false }: { light?: boolean }) {
+  const link = light
+    ? "font-semibold text-white underline decoration-white/50 underline-offset-4 hover:decoration-white"
+    : "font-semibold text-link transition-colors hover:text-deep";
+  return (
+    <span className={`text-sm leading-relaxed ${light ? "text-white/85" : "text-muted"}`}>
+      or call{" "}
+      <a href={TEL_HREF} className={link}>
+        {PHONE_DISPLAY}
       </a>
-      <span className="text-sm leading-snug text-muted">
-        or call Mike at{" "}
-        <a href={TEL_HREF} className="font-semibold text-link transition-colors hover:text-deep">
-          {PHONE_DISPLAY}
-        </a>
-      </span>
-    </div>
+      , or email{" "}
+      <a href={MAIL_HREF} className={link}>
+        {EMAIL}
+      </a>
+    </span>
   );
 }
 
@@ -91,27 +136,76 @@ export default function MoreTimePage() {
       <SiteNav />
 
       <main>
-        {/* Hero */}
-        <header className="mx-auto w-full max-w-4xl px-6 pb-14 pt-10 sm:px-10 sm:pt-14">
-          <h1 className="text-[2.75rem] font-light leading-[1.08] tracking-tight sm:text-6xl">
-            Your one page report,
-            <br />
-            <span className="font-accent italic text-[3.1rem] sm:text-[3.6rem]">
-              in plain words.
-            </span>
-          </h1>
-          <p className="mt-7 max-w-2xl text-lg leading-relaxed text-muted">
-            If Mike dropped off a one page report, this page explains what it means and what you
-            can do next. If you didn&rsquo;t get one yet, text us and we&rsquo;ll make you one for
-            free.
-          </p>
-          <TextMike className="mt-9" />
+        {/* Hero: the family photo carries the words. The left side of the photo is
+            soft lawn and sky, and a dark wash over it keeps the white text readable. */}
+        <header className="relative isolate overflow-hidden">
+          <Image
+            src="/moretime/hero-family.jpg"
+            alt="A contractor having dinner with his family at a picnic table in the backyard at sunset"
+            fill
+            priority
+            sizes="100vw"
+            className="-z-10 object-cover object-[70%_50%]"
+          />
+          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/75 via-black/60 to-black/40 sm:via-black/35 sm:to-black/0" />
+          <div className="mx-auto flex min-h-[34rem] w-full max-w-6xl flex-col justify-center px-6 py-16 sm:min-h-[38rem] sm:px-10">
+            <h1 className="max-w-xl text-[2.75rem] font-light leading-[1.08] tracking-tight text-white sm:text-6xl">
+              Get your evenings back.
+            </h1>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-white/90">
+              If Mike dropped off a one page report, this page explains what it means and what you
+              can do next. No report yet? Text us and we&rsquo;ll make you one for free.
+            </p>
+            <div className="mt-8 flex max-w-lg flex-col items-start gap-3">
+              <a href={SMS_HREF} className={BOOK_BUTTON_CLASS}>
+                Text &ldquo;MORE TIME&rdquo;
+              </a>
+              <ContactLinks light />
+            </div>
+          </div>
         </header>
+
+        {/* The postcard's opening, word for word */}
+        <section className="mx-auto w-full max-w-4xl px-6 pt-16 sm:px-10 sm:pt-20">
+          <h2 className={H2} style={{ color: CARD_BLUE }}>
+            How much of your day starts with:
+          </h2>
+          <ul className="mt-6 space-y-2 text-lg leading-relaxed">
+            {DAY_STARTS.map((l) => (
+              <li key={l.b}>
+                <span className="font-bold" style={{ color: "#1f5c2e" }}>
+                  {l.b}
+                </span>{" "}
+                <span className="text-muted">{l.r}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* The postcard's band: clock, the sum, the year. */}
+        <section className="mx-auto w-full max-w-4xl px-6 py-12 sm:px-10">
+          <div className="flex flex-col items-center gap-6 rounded-2xl bg-surface px-6 py-8 text-center sm:flex-row sm:gap-8 sm:px-10 sm:text-left">
+            <Clock className="h-28 w-28 shrink-0 sm:h-36 sm:w-36" />
+            <div className={condensed.className}>
+              <div className="text-2xl font-semibold uppercase tracking-wide sm:text-3xl" style={{ color: CARD_BLUE }}>
+                6 minutes x 6 times a day =
+              </div>
+              <div className="text-6xl font-extrabold uppercase leading-none sm:text-8xl" style={{ color: CARD_BLUE }}>
+                3 hours back every week
+              </div>
+              <div className="mt-3 text-2xl font-bold sm:text-3xl" style={{ color: CARD_GREEN }}>
+                That&rsquo;s 156 hours a year. Nearly a full work month.
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* What it checks */}
         <section className="bg-surface py-16 sm:py-20">
           <div className="mx-auto w-full max-w-4xl px-6 sm:px-10">
-            <h2 className="text-3xl font-light tracking-tight sm:text-4xl">What the report checks</h2>
+            <h2 className={H2} style={{ color: CARD_BLUE }}>
+              What your report checks
+            </h2>
             <p className="mt-4 max-w-2xl text-lg text-muted">
               It puts your business next to 3 local competitors and looks at what a customer sees
               before they ever call you.
@@ -132,7 +226,9 @@ export default function MoreTimePage() {
 
         {/* Fixes */}
         <section className="mx-auto w-full max-w-4xl px-6 py-16 sm:px-10 sm:py-20">
-          <h2 className="text-3xl font-light tracking-tight sm:text-4xl">The simple fixes</h2>
+          <h2 className={H2} style={{ color: CARD_BLUE }}>
+            The simple fixes
+          </h2>
           <p className="mt-4 max-w-2xl text-lg text-muted">
             Most of what keeps owners working at night is the same few jobs: writing quotes,
             sending invoices, chasing payment and calling people back. Here&rsquo;s what we set up:
@@ -151,7 +247,7 @@ export default function MoreTimePage() {
         {/* Already built */}
         <section className="bg-surface py-16 sm:py-20">
           <div className="mx-auto w-full max-w-4xl px-6 sm:px-10">
-            <h2 className="text-3xl font-light tracking-tight sm:text-4xl">
+            <h2 className={H2} style={{ color: CARD_BLUE }}>
               Simple tools we&rsquo;ve already built
             </h2>
             <p className="mt-4 max-w-2xl text-lg text-muted">
@@ -169,38 +265,66 @@ export default function MoreTimePage() {
         </section>
 
         {/* The call */}
-        <section className="bg-ink py-16 text-ink-foreground sm:py-20">
-          <div className="mx-auto w-full max-w-4xl px-6 sm:px-10">
-            <h2 className="text-3xl font-light tracking-tight sm:text-4xl">
-              Start with a free <span className="font-accent italic">20 minute</span> call
-            </h2>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-foreground/85">
-              We&rsquo;ll look at one thing you&rsquo;re tired of handling and why it keeps landing
-              back on your desk. Then Mike follows up with a specific change to try and how it could
-              save you time. If there&rsquo;s nothing worth fixing, we&rsquo;ll tell you that too.
-            </p>
-            <p className="mt-5 max-w-2xl leading-relaxed text-ink-foreground/85">
-              <span className="font-semibold text-ink-foreground">Mike&rsquo;s promise: </span>
-              if those 20 minutes are a waste of your time, tell him, and he&rsquo;ll send you a
-              Starbucks gift card. No hard feelings.
-            </p>
-            <div className="mt-9 flex flex-wrap items-center gap-5">
-              <a href={SMS_HREF} className={BOOK_BUTTON_CLASS}>
-                Text &ldquo;MORE TIME&rdquo;
-              </a>
-              <span className="text-sm text-ink-foreground/80">
-                or call{" "}
-                <a href={TEL_HREF} className="font-semibold text-ink-foreground underline">
-                  {PHONE_DISPLAY}
-                </a>
-              </span>
+        <section className="mx-auto w-full max-w-4xl px-6 pt-16 sm:px-10 sm:pt-20">
+          <h2 className={H2} style={{ color: CARD_BLUE }}>
+            Let&rsquo;s find the first thing you can get off your plate.
+          </h2>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
+            In 20 minutes, we&rsquo;ll look at one thing you&rsquo;re tired of handling and why it
+            keeps coming back to you. Mike follows up with a specific change to try, how to get
+            started and how it could save you time. If there&rsquo;s nothing worth fixing,
+            we&rsquo;ll tell you that too.
+          </p>
+          <p className="mt-5 max-w-2xl leading-relaxed text-muted">
+            <span className="font-semibold text-foreground">Mike&rsquo;s promise: </span>
+            if those 20 minutes are a waste of your time, tell him, and he&rsquo;ll send you a
+            Starbucks gift card. No hard feelings.
+          </p>
+        </section>
+
+        {/* The postcard's blue bar, with the circled number */}
+        <section className="mx-auto w-full max-w-6xl px-6 py-12 sm:px-10">
+          <div
+            className={`${condensed.className} flex flex-col items-center gap-6 rounded-2xl px-6 py-7 text-center text-white lg:flex-row lg:justify-between lg:px-10 lg:text-left`}
+            style={{ backgroundColor: CARD_BLUE }}
+          >
+            <div className="text-4xl font-semibold uppercase leading-[0.95] lg:text-5xl">
+              Let&rsquo;s get something
+              <br />
+              off your plate.
             </div>
+            <div className="text-lg font-semibold uppercase leading-snug tracking-wide lg:whitespace-nowrap lg:border-l lg:border-white/60 lg:pl-6">
+              No cost. No obligation to hire us.
+              <br />
+              <a href={SMS_HREF} className="underline decoration-white/50 underline-offset-4">
+                Text &ldquo;More time&rdquo;
+              </a>{" "}
+              or{" "}
+              <a href={MAIL_HREF} className="normal-case underline decoration-white/50 underline-offset-4">
+                {EMAIL}
+              </a>
+            </div>
+            <a href={TEL_HREF} className="relative shrink-0 px-9 py-4 text-4xl font-bold sm:text-5xl">
+              {/* Hand-drawn loop around the number, like the pen circle on the card */}
+              <svg viewBox="0 0 300 100" preserveAspectRatio="none" className="absolute inset-0 h-full w-full" aria-hidden="true">
+                <path
+                  d="M40 18 C110 2 230 4 280 26 C304 42 292 76 240 88 C170 102 70 98 26 80 C2 66 8 34 52 20 C90 10 150 8 200 12"
+                  fill="none"
+                  stroke="white"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <span className="relative">{PHONE_DISPLAY}</span>
+            </a>
           </div>
         </section>
 
         {/* Who */}
-        <section className="mx-auto w-full max-w-4xl px-6 py-16 sm:px-10">
-          <h2 className="text-2xl font-light tracking-tight sm:text-3xl">Who we are</h2>
+        <section className="mx-auto w-full max-w-4xl px-6 pb-16 sm:px-10">
+          <h2 className="font-accent text-2xl italic sm:text-3xl" style={{ color: CARD_BLUE }}>
+            Who we are
+          </h2>
           <p className="mt-4 max-w-2xl leading-relaxed text-muted">
             MiHo Partners is Mike Grabham and Howard Kim. Mike lives in Walla Walla, has started six
             companies and sold two, and has an MBA from Seattle University. Howard builds the tools:
