@@ -168,27 +168,28 @@ export function HomePage({ proportions = "current" }: { proportions?: Proportion
           </p>
         </div>
 
-        <div className="relative mx-auto aspect-square w-full max-w-md">
-          {/* Tan ring behind the founders — the warm family's first UI appearance,
-              mirroring Modern Life's halo behind their hero illustration. */}
-          <div className="absolute -inset-[7%] rounded-full bg-warm/60" />
-          <div className="absolute inset-0 rounded-full bg-accent-hover" />
-          <div className="absolute inset-[6%] overflow-hidden rounded-full bg-surface">
-            <Image
-              src="/founders/founders-composite.png"
-              alt="Mike Grabham and Howard Kim, co-founders of MiHo Partners"
-              fill
-              sizes="(max-width: 768px) 90vw, 440px"
-              className="object-cover"
-              priority
+        {/* Two real tools working (one looping video, a title card before each), in place of the founders photo (the founders still
+            have their own photos in "Who's behind this"). Screen recordings are
+            16:10, so the round frame became a rounded window; the tan halo and the
+            two-line tag stay so the hero keeps the same look. Muted, looping,
+            inline, with a poster so there's a picture before the video loads. */}
+        <div className="relative mx-auto w-full max-w-xl">
+          <div className="absolute -inset-[5%] rounded-[2rem] bg-warm/60" />
+          <div className="relative overflow-hidden rounded-2xl border border-ux-gray-2 bg-surface shadow-sm">
+            <video
+              src="/demos/tools-demo.mp4"
+              poster="/demos/tools-demo.jpg"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label="Screen recordings of two tools we built. First, More Time Socials: an owner brings a topic, reads the posts it wrote with their scores, and approves them. Second, a client dashboard with 30 days of sales, a weekly ad summary and recommendations."
+              className="block aspect-[16/10] w-full object-cover"
             />
           </div>
-          {/* Two lines, centred: the people on top, the company beneath. The
-              company is set in the serif italic — the same treatment the logo
-              gives it — so the two lines read as two different kinds of thing
-              rather than one run-on caption. */}
-          <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-background px-7 py-3 text-center shadow-sm">
-            <div className="text-sm font-semibold leading-tight">Mike &amp; Howard</div>
+          <div className="absolute left-1/2 top-full mt-3 -translate-x-1/2 whitespace-nowrap rounded-full bg-background px-7 py-3 text-center shadow-sm">
+            <div className="text-sm font-semibold leading-tight">Two tools we built</div>
             <div className="font-accent text-sm italic leading-tight text-muted">MiHo Partners</div>
           </div>
         </div>
